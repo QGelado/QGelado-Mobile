@@ -10,7 +10,6 @@ import {
   Dimensions,
 } from 'react-native';
 
-import Footer from '../components/Footer';
 import { useFonts } from 'expo-font';
 
 
@@ -71,7 +70,6 @@ const PerfilUsuario = ({ navigation }) => {
         </View>
       </View>
 
-     {/*<Footer navegacao={navigation}/>*/}
     </SafeAreaView>
   );
 };

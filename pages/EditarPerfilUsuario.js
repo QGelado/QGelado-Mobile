@@ -9,7 +9,7 @@ import {
   Pressable,
   Dimensions,
 } from 'react-native';
-import Footer from '../components/Footer';
+
 import { useFonts } from 'expo-font';
 
 
@@ -64,7 +64,6 @@ const EditarPerfilUsuario = ({ navigation }) => {
         </View>
       </View>
 
-      {/*<Footer navegacao={navigation}/>*/}
     </SafeAreaView>
   );
 };
