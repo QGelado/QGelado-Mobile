@@ -22,7 +22,7 @@ const Pedidos = ({item, navigation}) => {
 
 
   return (
-    <Pressable  style={styles.container__main} onPress={ () => navigation.navigate('Editar-Perfil')  }>
+    <Pressable  style={styles.container__main} onPress={ () => navigation.navigate('Visualiza-Pedido')  }>
       <View style={styles.main__containerItens}>
           <Text style={styles.containerItens__dataPedidoText}>{item.data}</Text>
           <Image source={require("../assets/pedidos/icone-pedidos.png")} />

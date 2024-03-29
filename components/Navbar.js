@@ -13,15 +13,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import VisualizaTodosPedidos from '../pages/VisualizaTodosPedidos';
+import VisualizaUmPedido from '../pages/VisualizaUmPedido';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
 
 const Tab = createBottomTabNavigator();
-
-/*
-tabBarButton: () => null,
-tabBarVisible: false
-*/ 
 
 const Navbar = (props) => {
   return (
@@ -53,6 +49,31 @@ const Navbar = (props) => {
           tabBarButton: () => null,
           tabBarVisible: false
         })}
+      />
+
+      <Tab.Screen
+          name="Visualiza-Pedido"
+          component={VisualizaUmPedido}
+          options={(props) => ({
+            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+            headerLeft: () => <OurStatusBarLeft />,
+            headerTitle: () => {},
+            headerStyle: { backgroundColor: '#E5F8FF' },
+            headerTintColor: '#fff',
+            tabBarIcon: ({ size, focused, color }) => {
+              return (
+                <Image
+                  style={{ width: size, height: size }}
+                  source={require('../assets/footer/footer-perfil-icon.png')}
+                />
+              );
+            },
+            tabBarLabel: 'Perfil',
+            tabBarActiveTintColor: '#FF40A0',
+            tabBarInactiveTintColor: '#000000',
+            tabBarButton: () => null,
+            tabBarVisible: false
+          })}
       />
       
       <Tab.Screen
