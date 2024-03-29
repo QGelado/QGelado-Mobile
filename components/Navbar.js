@@ -33,7 +33,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Visualizar-Pedidos"
-        component={VisualizaTodosPedidos}
+        component={() => <VisualizaTodosPedidos navigation={props.navigation} />}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerTitle: () => {},

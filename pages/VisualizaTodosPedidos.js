@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import Pedidos from '../components/Pedidos';
 import dataTest from '../dataTest';
 
-const VisualzaTodosPedidos = () => {
+const VisualzaTodosPedidos = (props) => {
   
   const [fontsLoaded] = useFonts({
     'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
@@ -34,7 +34,7 @@ const VisualzaTodosPedidos = () => {
 
       <FlatList 
             data={dataTest}
-            renderItem={({item}) => <Pedidos item={item}/>}
+            renderItem={({item}) => <Pedidos item={item} navigation={props.navigation}/>}
             keyExtractor={item => item._id}
       />
     </SafeAreaView>
