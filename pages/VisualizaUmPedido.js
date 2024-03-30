@@ -3,7 +3,6 @@ import { Text, SafeAreaView, StyleSheet, View, FlatList, Image, Dimensions } fro
 import { useFonts } from 'expo-font';
 import {LinearGradient} from 'expo-linear-gradient';
 
-import Pedidos from '../components/Pedidos';
 import dataPedidosUnico from '../dataPedidosUnico';
 
 const VisualizaUmPedido = (props) => {
@@ -26,6 +25,36 @@ const VisualizaUmPedido = (props) => {
       colorStatusBackground = ["#FEF2E5", "#CD6200"];
   }
 
+  function displaySorvetes({item}){
+
+    return (
+      !item.hasOwnProperty("sabores")
+      ? 
+      <View style={styles.pedidos__containerList}>
+        <View>
+          <Text style={styles.containerList__textInformation}>{item.nome}</Text>
+          <Text style={{fontSize: 10}}>{item.sabor}</Text>
+        </View>
+        <Text style={[styles.containerList__textInformation, {fontFamily: "poppins-regular"}]}>R$ {item.preco}</Text>
+      </View>
+      : 
+      <View style={[styles.pedidos__containerList, {alignItems: "start"}]}>
+        <View>
+          <Text style={styles.containerList__textInformation}>{item.nome}</Text>
+          
+            {item['sabores'].map((e) => {
+                return <Text style={{fontSize: 10}}>{e.sabor}</Text>    
+            })}
+
+            <Text style={{fontSize: 10}}>{item['recipiente']['nome']} - {item['recipiente']['quantidade']}</Text>    
+        </View>
+        <Text style={[styles.containerList__textInformation, {fontFamily: "poppins-regular", marginTop: 2}]}>R$ {item.preco}</Text>
+      </View>
+    )
+    
+  }
+
+
   /*
   useEffect(() => {
     fetch('https://r7b6tzdg-3000.brs.devtunnels.ms/pedidos')
@@ -47,8 +76,8 @@ const VisualizaUmPedido = (props) => {
 
       <View style={styles.main__containerPedido}>
           <View style={styles.containerPedidos__horarioEStatus}>
-            <View style={styles.horarioEStatus__divisao}>
-                <Text style={styles.horarioEStatus__divisao__dataText}>{dadosPedidos[0].data}</Text>
+            <View>
+                <Text style={styles.horarioEStatus__divisao__dataText}>{new Date(dadosPedidos[0].data).toLocaleTimeString("pt-BR").slice(0,5) + " - " + new Date(dadosPedidos[0].data).toLocaleDateString("pt-BR").slice(0,5)}</Text>
 
                 <Text style={
                   {width: 100, 
@@ -63,28 +92,37 @@ const VisualizaUmPedido = (props) => {
             <Image source={require("../assets/pedidos/icone-pedidos.png")} style={{transform: [{rotate: '180deg'}]}} />
           </View>
 
-          <View style={styles.containerPedidos__sorvetes}>
-          
-          
-          </View>
+          <FlatList 
+            data={dataPedidosUnico[0]['sorvetes']}
+            renderItem={({item}) => displaySorvetes({item})}
+            keyExtractor={item => item._id}
+            ItemSeparatorComponent={() => (
+              <View style={{ margin: 5 }} />
+            )}
+          />
 
-          <View style={styles.containerPedidos__linhaSeperadora}>
+          <View>
               <LinearGradient
                 colors={['#6AAAFF', '#FF90C8']}
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
-                style={{flex: 1, padding: 2, borderRadius: 5}}
+                style={{flex: 1, padding: 2, borderRadius: 5, margin: 5}}
               />
-           
           </View>
 
 
-          <View style={styles.containerPedidos__preco}> 
-          
+          <View style={styles.containerPedidos__precoECodigo}> 
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.containerPedidos__preco__simboloPreco}>R$ </Text>
+              <Text style={styles.containerPedidos__preco__valorTotal}>{dadosPedidos[0].preco["$numberDecimal"]}</Text>
+            </View>
           </View>
 
-          <View style={styles.containerPedidos__codigos}>
-          
+          <View style={styles.containerPedidos__precoECodigo}>
+            <View style={{alignItems: 'flex-end'}}>
+              <Text style={{fontSize: 13, color: "#197CFF", fontFamily: "poppins-regular"}}>Código:</Text>
+              <Text style={{fontSize: 16, color: "#197CFF", fontFamily: "poppins-bold"}}>{dadosPedidos[0].codigo}</Text>
+            </View>
           </View>
 
       </View>
@@ -104,7 +142,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "start",
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    marginBottom: 10
   },  
   horarioEStatus__divisao__dataText: {
     fontSize: 10,
@@ -124,6 +163,36 @@ const styles = StyleSheet.create({
     backgroundColor: "#C3EFFF",
     borderRadius: 20,
     marginBottom: 20
+  },
+  pedidos__containerList:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10
+  },
+  containerList__textInformation:{
+    fontSize: 11,
+    fontFamily: "poppins-bold",
+    color: "#380000"
+  },
+  containerPedidos__precoECodigo:{
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 20,
+    marginRight: 10,
+    padding: 2
+  },
+  containerPedidos__preco__simboloPreco:{
+    fontSize: 16,
+    fontFamily: "titan-one",
+    color: "#FF40A0"
+  },
+  containerPedidos__preco__valorTotal:{
+    fontSize: 20,
+    fontFamily: "titan-one",
+    color: "#197CFF",
+    marginLeft: 5
   }
   
 });

@@ -24,7 +24,9 @@ const Pedidos = ({item, navigation}) => {
   return (
     <Pressable  style={styles.container__main} onPress={ () => navigation.navigate('Visualiza-Pedido')  }>
       <View style={styles.main__containerItens}>
-          <Text style={styles.containerItens__dataPedidoText}>{item.data}</Text>
+          <Text style={styles.containerItens__dataPedidoText}>
+          {new Date(item.data).toLocaleTimeString("pt-BR").slice(0,5) + " - " + new Date(item.data).toLocaleDateString("pt-BR").slice(0,5)}
+          </Text>
           <Image source={require("../assets/pedidos/icone-pedidos.png")} />
       </View>
 
