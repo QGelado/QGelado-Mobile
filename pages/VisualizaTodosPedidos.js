@@ -1,17 +1,34 @@
 import React, { useEffect } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, FlatList } from 'react-native';
 import { useFonts } from 'expo-font';
+import * as SecureStore from 'expo-secure-store';
 
 import Pedidos from '../components/Pedidos';
 import dataTest from '../dataTest';
 
+
+async function recuperaDadosUsuario(){
+  const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
+  const idRecuperado = await SecureStore.getItemAsync('id_usuario');
+  console.log("Dados usuário:")
+  console.log(tokenRecuperado)
+  console.log(idRecuperado)
+}
+
+
 const VisualzaTodosPedidos = (props) => {
+
   
   const [fontsLoaded] = useFonts({
     'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
     'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
     'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
   });
+
+
+    useEffect(() => {
+      recuperaDadosUsuario()
+    }, []);
 
   /*
   useEffect(() => {

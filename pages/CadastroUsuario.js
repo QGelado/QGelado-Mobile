@@ -12,23 +12,99 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert
 } from 'react-native';
+import { useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 
 import { useFonts } from 'expo-font';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
+import route from '../BackendEndpoint';
+
+/*onPress={() => navigation.navigate('navbar')}>*/
+
+async function alertMessage(titulo = "Erro", texto= "Alguma coisa deu errado!")  {
+  Alert.alert(titulo, texto, [
+    {
+      text: 'OK', onPress: () => console.log('OK')},
+    ]
+  );
+}
+
+async function guardaToken(token, id_number){
+  await SecureStore.setItemAsync('token_usuario', token);
+  await SecureStore.setItemAsync('id_usuario', id_number);
+}
+
 
 const CadastroUsuario = ({ navigation }) => {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [endereco, setEndereco] = useState('');
+
   const [fontsLoaded] = useFonts({
     'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
     'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
     'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
   });
 
+  function cadastraUsuarioAPI() {
+    const obj = {
+      nome: nome,
+      email: email,
+      endereco: endereco,
+      senha: senha,
+      telefone: parseInt(telefone),
+    };
+
+    fetch(`${route}/usuario`, {
+      method: 'POST',
+      body: JSON.stringify(obj),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) =>{ 
+        const statusCode = response.status;
+
+        if(statusCode == 200 || statusCode == 201) {
+          return response.json();
+        }
+        
+        return Promise.reject(response);
+
+      })
+      .then((json) => {
+        console.log(json);
+        const token = json.token;
+        const idUsuario = json.data._id;
+
+        guardaToken(token, idUsuario);
+
+        alertMessage(`Seja bem vindo, ${json.data.nome}!`, "Agora você pode aproveitar e escolher o seu sorvete preferido!");
+        
+        navigation.navigate('navbar');
+      })
+      .catch((error) => {
+        console.log("Um erro aconteceu!");
+
+        error.json().then((json) => {
+          alertMessage("Erro ao cadastrar usuário!", json.message);
+        })
+      });
+  }
+
   return (
     <SafeAreaView style={styles.container__main}>
       <View style={{ flex: 1 }}>
-        <View style={{ justifyContent: 'center', height: Dimensions.get("screen").height, }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            height: Dimensions.get('screen').height,
+          }}>
           <Text style={styles.textTitleMain}>Cadastre-se</Text>
 
           <View style={styles.mainContainerInputs}>
@@ -37,6 +113,8 @@ const CadastroUsuario = ({ navigation }) => {
               <TextInput
                 style={styles.textInput}
                 placeholder={'Digite o seu nome'}
+                value={nome}
+                onChangeText={setNome}
               />
             </View>
 
@@ -45,6 +123,8 @@ const CadastroUsuario = ({ navigation }) => {
               <TextInput
                 style={styles.textInput}
                 placeholder={'Digite o seu email'}
+                value={email}
+                onChangeText={setEmail}
               />
             </View>
 
@@ -54,6 +134,8 @@ const CadastroUsuario = ({ navigation }) => {
                 style={styles.textInput}
                 placeholder={'Digite a sua senha'}
                 secureTextEntry={true}
+                value={senha}
+                onChangeText={setSenha}
               />
             </View>
 
@@ -61,7 +143,9 @@ const CadastroUsuario = ({ navigation }) => {
               <Text style={styles.titleSecundaryTitle}>Telefone</Text>
               <TextInput
                 style={styles.textInput}
-                placeholder={'(99) 99999-9999'}
+                placeholder={'1199999-9999'}
+                value={telefone}
+                onChangeText={setTelefone}
               />
             </View>
 
@@ -70,12 +154,14 @@ const CadastroUsuario = ({ navigation }) => {
               <TextInput
                 style={styles.textInput}
                 placeholder={'Digite o seu endereço'}
+                value={endereco}
+                onChangeText={setEndereco}
               />
             </View>
 
             <Pressable
               style={styles.textInputSalvar}
-              onPress={() => navigation.navigate('navbar')}>
+              onPress={() => cadastraUsuarioAPI()}>
               <Text
                 style={{
                   textAlign: 'center',
