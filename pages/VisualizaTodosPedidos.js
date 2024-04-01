@@ -7,7 +7,6 @@ import Pedidos from '../components/Pedidos';
 import route from '../BackendEndpoint';
 
 const VisualzaTodosPedidos = (props) => {
-  console.log("todos pedidos")
   const [pedidosData, setPedidosData] = useState("");
   
   const [fontsLoaded] = useFonts({
