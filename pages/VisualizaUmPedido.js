@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, FlatList, Image, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import {LinearGradient} from 'expo-linear-gradient';
+import * as SecureStore from 'expo-secure-store';
+import route from '../BackendEndpoint';
 
-import dataPedidosUnico from '../dataPedidosUnico';
 
 const VisualizaUmPedido = (props) => {
   
-  const [dadosPedidos, setDadosPedidos] = useState(dataPedidosUnico);
+  const [dadosPedidos, setDadosPedidos] = useState([{}]);
+  const [colorStatusBackground, setColorStatusBackground] = useState(["#FEF2E5", "#CD6200"]);
 
   const [fontsLoaded] = useFonts({
     'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
@@ -15,15 +17,53 @@ const VisualizaUmPedido = (props) => {
     'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
   });
 
-  let colorStatusBackground = "";
+  useEffect(() => {
+    async function recuperaDadosUsuario(){
+        const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
+        const pedidoRecuperado = await SecureStore.getItemAsync('pedido_atual');
 
-  if(dadosPedidos[0].status == "Finalizado"){
-      colorStatusBackground = ["#EBF9F1", "#1F9254"];
-  }else if(dadosPedidos[0].status == "A confirmar"){
-      colorStatusBackground = ["#FBE7E8", "#A30D11"];
-  }else{
-      colorStatusBackground = ["#FEF2E5", "#CD6200"];
-  }
+        fetch(`${route}/pedidos/busca?codigo=${pedidoRecuperado}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${tokenRecuperado}`,
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) =>{ 
+          const statusCode = response.status;
+
+          if(statusCode == 200) {
+            return response.json();
+          }
+
+          return Promise.reject(response);
+        })
+        .then((json) => {
+
+          setDadosPedidos(json);
+
+        })
+        .catch((error) => {
+          console.log("Erro!:");
+          console.log(error);
+        })
+    }
+
+    recuperaDadosUsuario();
+    
+  }, []);
+
+  useEffect(() =>{
+    if(dadosPedidos.hasOwnProperty("status")){
+      if(dadosPedidos[0].status == "Finalizado"){
+        setColorStatusBackground(["#EBF9F1", "#1F9254"]);
+      }else if(dadosPedidos[0].status == "A confirmar"){
+          setColorStatusBackground(["#FBE7E8", "#A30D11"]);
+      }else{
+          setColorStatusBackground(["#FEF2E5", "#CD6200"]);
+      }
+    }
+  }, [dadosPedidos])
 
   function displaySorvetes({item}){
 
@@ -55,18 +95,6 @@ const VisualizaUmPedido = (props) => {
   }
 
 
-  /*
-  useEffect(() => {
-    fetch('https://r7b6tzdg-3000.brs.devtunnels.ms/pedidos')
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-*/
 
   return (
     <SafeAreaView style={styles.container__main}>
@@ -74,7 +102,7 @@ const VisualizaUmPedido = (props) => {
         <Text style={styles.textTitleMain}>Meu Pedido</Text>
       </View>
 
-      <View style={styles.main__containerPedido}>
+      {dadosPedidos[0].hasOwnProperty("_id") ? <View style={styles.main__containerPedido}>
           <View style={styles.containerPedidos__horarioEStatus}>
             <View>
                 <Text style={styles.horarioEStatus__divisao__dataText}>{new Date(dadosPedidos[0].data).toLocaleTimeString("pt-BR").slice(0,5) + " - " + new Date(dadosPedidos[0].data).toLocaleDateString("pt-BR").slice(0,5)}</Text>
@@ -86,14 +114,14 @@ const VisualizaUmPedido = (props) => {
                   borderRadius: 10,
                   backgroundColor: colorStatusBackground[0],
                   color: colorStatusBackground[1]}}>
-                  {dataPedidosUnico[0].status}</Text>
+                  {dadosPedidos[0].status}</Text>
             </View> 
 
             <Image source={require("../assets/pedidos/icone-pedidos.png")} style={{transform: [{rotate: '180deg'}]}} />
           </View>
 
           <FlatList 
-            data={dataPedidosUnico[0]['sorvetes']}
+            data={dadosPedidos[0]['sorvetes']}
             renderItem={({item}) => displaySorvetes({item})}
             keyExtractor={item => item._id}
             ItemSeparatorComponent={() => (
@@ -125,7 +153,7 @@ const VisualizaUmPedido = (props) => {
             </View>
           </View>
 
-      </View>
+      </View> : ""}
 
     </SafeAreaView>
   );

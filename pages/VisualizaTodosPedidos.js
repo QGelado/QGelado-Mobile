@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, FlatList } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SecureStore from 'expo-secure-store';
 
 import Pedidos from '../components/Pedidos';
-import dataTest from '../dataTest';
-
-
-async function recuperaDadosUsuario(){
-  const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
-  const idRecuperado = await SecureStore.getItemAsync('id_usuario');
-  console.log("Dados usuário:")
-  console.log(tokenRecuperado)
-  console.log(idRecuperado)
-}
-
+import route from '../BackendEndpoint';
 
 const VisualzaTodosPedidos = (props) => {
-
+  console.log("todos pedidos")
+  const [pedidosData, setPedidosData] = useState("");
   
   const [fontsLoaded] = useFonts({
     'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
@@ -25,23 +16,45 @@ const VisualzaTodosPedidos = (props) => {
     'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
   });
 
-
-    useEffect(() => {
-      recuperaDadosUsuario()
-    }, []);
-
-  /*
   useEffect(() => {
-    fetch('https://r7b6tzdg-3000.brs.devtunnels.ms/pedidos')
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    async function recuperaDadosUsuario(){
+        const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
+        const idRecuperado = await SecureStore.getItemAsync('id_usuario');
+
+        fetch(`${route}/pedidos/busca?idUsuario=${idRecuperado}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${tokenRecuperado}`,
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) =>{ 
+          const statusCode = response.status;
+
+          if(statusCode == 200) {
+            return response.json();
+          }
+
+          return Promise.reject(response);
+        })
+        .then((json) => {
+
+          if(json.length == 0){
+            setPedidosData("Você ainda não tem pedidos!");
+          }else{
+            setPedidosData(json);
+          }
+          
+        })
+        .catch((error) => {
+          console.log("Erro!:");
+          console.log(error);
+          setPedidosData("Você ainda não tem pedidos!");
+        });    
+    }
+
+    recuperaDadosUsuario()
   }, []);
-*/
 
   return (
     <SafeAreaView style={styles.container__main}>
@@ -49,11 +62,11 @@ const VisualzaTodosPedidos = (props) => {
         <Text style={styles.textTitleMain}>Meus Pedidos</Text>
       </View>
 
-      <FlatList 
-            data={dataTest}
+      {pedidosData == "Você ainda não tem pedidos!" ? <Text style={{color: "#197CFF", fontSize: 16, fontFamily: 'poppins-regular'}}>{pedidosData}</Text>: <FlatList 
+            data={pedidosData}
             renderItem={({item}) => <Pedidos item={item} navigation={props.navigation}/>}
             keyExtractor={item => item._id}
-      />
+      />}
     </SafeAreaView>
   );
 };
@@ -61,7 +74,7 @@ const VisualzaTodosPedidos = (props) => {
 const styles = StyleSheet.create({
   container__main: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'start',
     alignItems: 'center',
     backgroundColor: '#E5F8FF',
   },

@@ -22,8 +22,6 @@ import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 import route from '../BackendEndpoint';
 
-/*onPress={() => navigation.navigate('navbar')}>*/
-
 async function alertMessage(titulo = "Erro", texto= "Alguma coisa deu errado!")  {
   Alert.alert(titulo, texto, [
     {
@@ -78,7 +76,6 @@ const CadastroUsuario = ({ navigation }) => {
 
       })
       .then((json) => {
-        console.log(json);
         const token = json.token;
         const idUsuario = json.data._id;
 

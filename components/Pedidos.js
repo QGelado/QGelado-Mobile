@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, Image, Pressable  } from 'react-native';
 import { useFonts } from 'expo-font';
+import * as SecureStore from 'expo-secure-store';
+
+
+async function guardaPedido(codigo_pedido){
+  await SecureStore.setItemAsync('pedido_atual', codigo_pedido);
+}
 
 const Pedidos = ({item, navigation}) => {
 
@@ -22,7 +28,7 @@ const Pedidos = ({item, navigation}) => {
 
 
   return (
-    <Pressable  style={styles.container__main} onPress={ () => navigation.navigate('Visualiza-Pedido')  }>
+    <Pressable  style={styles.container__main} onPress={ () => {guardaPedido(item.codigo.toString()); navigation.navigate('Visualiza-Pedido')}  }>
       <View style={styles.main__containerItens}>
           <Text style={styles.containerItens__dataPedidoText}>
           {new Date(item.data).toLocaleTimeString("pt-BR").slice(0,5) + " - " + new Date(item.data).toLocaleDateString("pt-BR").slice(0,5)}
