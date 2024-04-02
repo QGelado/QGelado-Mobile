@@ -13,14 +13,13 @@ const CardLoading = () => {
       style={[Styles.boxVerticalCenter, Styles.cardProduct]}
       onPress={() => navigation.navigate("Editar-Perfil")}
     >
-      <Skeleton  style={Styles.imgProduct}/>
-      <View style={Styles.boxVerticalStart}>
-        <Skeleton  style={{ backgroundColor: "#adadad", width: "70%", height: 20,}}/>
-        <Skeleton  style={{ backgroundColor: "#adadad", width: "85%", height: 20,}}/>
+      <Skeleton colorMode="light" height={110} width={'100%'}/>
+      <View style={Styles.boxVerticalStartLoader}>
+        <Skeleton colorMode="light" width={"70%"} height={20}/>
+        <Skeleton colorMode="light" width={"85%"} height={15}/>
         <View style={Styles.boxHorizontalSpace}>
-          <Skeleton  style={Styles.boxHorizontalCenter}/>
-          <Skeleton  style={{ backgroundColor: "#adadad", width: "30%", height: 20,}}/>
-          <Skeleton  style={{ backgroundColor: "#adadad", width: 20, height: 20, borderRadius: 100}}/>
+          <Skeleton colorMode="light" width={35} height={25}/>
+          <Skeleton colorMode="light" width={25} height={25} radius="round"/>
         </View>
       </View>
     </MotiView>

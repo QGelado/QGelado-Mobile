@@ -48,8 +48,10 @@ export default StyleSheet.create({
   },
   inputFilter: {
     backgroundColor: '#fff',
+    fontFamily: 'poppins-regular',
     borderRadius: 50,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     color: '#C4C4C4',
     width: '85%',
   },
@@ -89,7 +91,7 @@ export default StyleSheet.create({
     width: '100%',
     height: 60,
     padding: 15,
-    borderRadius: 15,
+    borderRadius: 20,
   },
   textMonteSorvete:{
     fontFamily: 'titan-one',

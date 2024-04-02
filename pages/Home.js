@@ -5,18 +5,21 @@ import Styles from '../style/HomeStyles'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Link } from '@react-navigation/native';
 import CardHome from '../components/CardHome';
-import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native"
 import CardLoading from '../components/CardLoading';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Home() {
   const [filter, setFilter] = useState({
     text: '',
     tag: 'Todos'
   })
+  const [input, setInput] = useState('')
   const tags = ['Todos', 'Sorvete de Massa', 'Picolé']
   const [sorvetes, setSorvetes] = useState([])
-  const user = {
-    nome: 'Diogo'
+  const [user, setUser] = useState(null)
+
+  const filterSorvetes = () => {
+    setFilter({...filter, text: input})
   }
 
   const getSorvetes = () => {
@@ -32,8 +35,46 @@ export default function Home() {
       return null
     })
   }
+  async function recuperaDadosUsuario(){
+      const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
+      const idRecuperado = await SecureStore.getItemAsync('id_usuario');
 
+      fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${idRecuperado}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${tokenRecuperado}`,
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+      .then((response) =>{ 
+        const statusCode = response.status;
+
+        if(statusCode == 200) {
+          return response.json();
+        }
+
+        setUser({nome: 'Usuário'});
+        return Promise.reject(response);
+      })
+      .then((json) => {
+
+        if(json.length == 0){
+          setUser({nome: 'Usuário'});
+        }else{
+          setUser(json);
+        }
+        
+      })
+      .catch((error) => {
+        console.log("Erro!:");
+        console.log(error);
+        setPedidosData("Você ainda não tem pedidos!");
+      });    
+  }
+
+  
   useEffect(() => {
+    recuperaDadosUsuario()
     getSorvetes()
   }, [])
 
@@ -54,9 +95,12 @@ export default function Home() {
           <TextInput 
             style={Styles.inputFilter} 
             placeholder="Pesquise o seu sabor favorito"
-            onChangeText={(text) => setFilter({...filter, text: text})}
+            placeholderTextColor={'#C4C4C4'}
+            onChangeText={text => {
+              setInput(text)
+            }}
           />
-          <TouchableOpacity style={Styles.buttonSearch}>
+          <TouchableOpacity style={Styles.buttonSearch} onPress={filterSorvetes}>
             <Ionicons name="search" size={18} color="#FF40A0" />
           </TouchableOpacity>
         </View>
@@ -70,7 +114,9 @@ export default function Home() {
         ))}
         </View>
         <Link to={{screen: 'Perfil-Usuario'}} style={{width:'100%'}}>
-          <LinearGradient colors={['#197CFF', '#C3EFFF']} style={Styles.boxMontaSorvete}>
+          <LinearGradient colors={['#197CFF', '#C3EFFF']} style={Styles.boxMontaSorvete}
+          start={{x:0,y:1}}
+          end={{x:1,y:0}}>
             <Text style={Styles.textMonteSorvete}>
               Monte o seu sorvete!             
             </Text>
@@ -80,15 +126,20 @@ export default function Home() {
         </Link>
       
         <View style={{...Styles.boxHorizontalStart, flexWrap:'wrap',}}>
-          <CardLoading/>
-          {sorvetes && sorvetes.filter((product) => {
-            if(filter?.text == "" ||
-              Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.text.toLowerCase()))){
-              return product
-            }
-          })?.slice(0,4).map((product) => (
-            <CardHome product={product} key={product.id}/>
-          ))}
+          {
+            sorvetes.length === 0 && Array.from({length:4}).map(() => <CardLoading/>)
+          }
+          
+          {
+            sorvetes.length > 0 && sorvetes?.filter((product) => {
+              if(filter?.text == "" ||
+                Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.text.toLowerCase()))){
+                return product
+              }
+            })?.slice(0,4).map((sorvete) => (
+              <CardHome sorvete={sorvete} key={sorvete.id}/>
+            ))
+          }
         </View>
         <Link to={{screen: 'Perfil-Usuario'}} style={Styles.linkMore}>
           <Text style={Styles.more}>{">"}</Text>

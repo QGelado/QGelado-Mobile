@@ -29,6 +29,15 @@ export default StyleSheet.create({
     padding: 10,
     gap: -5
   },
+  boxVerticalStartLoader: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: 10,
+    gap: 5
+  },
   boxHorizontalCenter: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -51,14 +60,14 @@ export default StyleSheet.create({
   },
   cardProduct: {
     backgroundColor:'#fff',
-    borderRadius: 10,
+    borderRadius: 20,
     flexGrow: 1,
     width: '45%',
     maxWidth: '48%'
   },
   imgProduct: {
     backgroundColor:'#F4FCFF',
-    borderRadius: 10,
+    borderRadius: 20,
     width: '100%',
     height: 110,
     alignItems: 'center',
