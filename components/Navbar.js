@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons'
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import Home from '../pages/Home';
+import Sorvete from '../pages/Sorvete';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
 
@@ -71,6 +72,30 @@ const Navbar = (props) => {
           tabBarLabel: 'Perfil',
           tabBarActiveTintColor: '#FF40A0',
           tabBarInactiveTintColor: '#000000',
+        })}
+      />
+
+      <Tab.Screen
+        name="Sorvete"
+        component={Sorvete}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Sorvete',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+          tabBarButton: () => null,
+          tabBarVisible: false
         })}
       />
 
