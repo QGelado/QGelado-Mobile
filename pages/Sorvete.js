@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, TouchableOpacity, Image, Share } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import Styles from '../style/SorveteStyles'
 import { Ionicons } from '@expo/vector-icons'
 import ViewShot, { captureRef } from 'react-native-view-shot'
 import * as Sharing from "expo-sharing";
+import { LinearGradient } from 'expo-linear-gradient'
 
 const Sorvete = ({route}) => {
     const { id } = route.params
@@ -54,6 +55,10 @@ const Sorvete = ({route}) => {
       }
     }
 
+    const addCart = () =>{
+      Alert.alert(`${sorvete?.nome} foi adicionado ao carrinho!`)
+    }
+
     useEffect(() => {
       getSorvetes()
     }, [])
@@ -85,12 +90,14 @@ const Sorvete = ({route}) => {
             <Ionicons name="share-social" color={"#6AAAFF"} size={20} />
           </TouchableOpacity>
         </View>
-        <View style={[Styles.boxHorizontalSpace, { marginTop: 10 }]}>
-          <TouchableOpacity style={[Styles.boxHorizontalCenter, Styles.btnCart]}>
-            <Ionicons name='cart-outline' size={20} color={"#fff"}/>
-            <Text style={Styles.textBtns}>Adicionar ao carrinho</Text>
-          </TouchableOpacity>
-          <View style={[Styles.boxHorizontalCenter, Styles.btnQuantidade]}>
+        <View style={[Styles.boxHorizontalSpace, { marginTop: 30 }]}>
+          <LinearGradient colors={['#FFC2E1', '#FF90C8']} style={[Styles.boxHorizontalCenter, Styles.btnCart]} >
+            <TouchableOpacity style={[Styles.boxHorizontalCenter]} onPress={addCart}>
+              <Ionicons name='cart-outline' size={20} color={"#fff"}/>
+              <Text style={Styles.textBtns}>Adicionar ao carrinho</Text>
+            </TouchableOpacity>
+          </LinearGradient>
+          <LinearGradient colors={['#6AAAFF', '#197CFF']} style={[Styles.boxHorizontalCenter, Styles.btnQuantidade]} >
             <TouchableOpacity onPress={menosSorvete}>
               <Text style={Styles.textBtns}> - </Text>
             </TouchableOpacity>
@@ -98,7 +105,7 @@ const Sorvete = ({route}) => {
             <TouchableOpacity onPress={maisSorvete}>
               <Text style={Styles.textBtns}>  + </Text>
             </TouchableOpacity>
-          </View>
+          </LinearGradient>
         </View>
       </View>
     </View>

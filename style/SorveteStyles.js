@@ -125,16 +125,17 @@ export default StyleSheet.create({
     color: '#6AAAFF'
   },
   btnCart:{
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: '#FF90C8',
     borderRadius: 100
   },
   btnQuantidade:{
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: '#197CFF',
-    borderRadius: 100
+    borderRadius: 100,
+    width: 100,
   },
   textBtns:{
     fontFamily: 'titan-one',
