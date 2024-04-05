@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import React, { useEffect, useState, useRef } from 'react'
+import { View, Text, TouchableOpacity, Image, Share } from 'react-native'
 import Styles from '../style/SorveteStyles'
+import { Ionicons } from '@expo/vector-icons'
+import ViewShot, { captureRef } from 'react-native-view-shot'
+import * as Sharing from "expo-sharing";
 
 const Sorvete = ({route}) => {
     const { id } = route.params
     const [sorvete, setSorvete] = useState({})
+    const [quantidade, setQuantidade] = useState(1)
+    const ref = useRef()
     const getSorvetes = () => {
       fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao/${id}`, {
         method: 'GET'
@@ -27,41 +32,73 @@ const Sorvete = ({route}) => {
       })
     }
 
+    const shareSorvete = async () => {
+      try{
+        const uri = await captureRef(ref, {
+          format: 'png',
+          quality: 0.7
+        })
+        Sharing.shareAsync("file://" + uri, {dialogTitle: sorvete.nome});
+
+      } catch(error){
+        console.log(error);
+      }
+    };
+
+    const maisSorvete = () => {
+      setQuantidade(quantidade + 1)
+    }
+    const menosSorvete = () => {
+      if(quantidade > 1){
+        setQuantidade(quantidade - 1)
+      }
+    }
+
     useEffect(() => {
       getSorvetes()
     }, [])
   return (
-    <View>
-      <View>
+    <View style={Styles.App} ref={ref}>
+      <View style={Styles.imgSorvete}>
         <Image 
           source={{
             uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.imagem}`,
           }}
-          style={{ width: 50, height: 60, objectFit: "contain" }}/>
+          style={{ width: 220, height: 220, objectFit: "contain" }}/>
       </View>
-      <View>
-        <Text>
+      <View style={[Styles.boxVerticalStart, Styles.infoSorvete]}>
+        <Text style={Styles.titleSorvete}>
           {sorvete?.nome}
         </Text>
-        <Text>
+        <Text style={Styles.descriptionSorvete}>
           {sorvete?.descricao}
         </Text>
-        <View>
-        <View style={Styles.boxHorizontalCenter}>
+        <View style={[Styles.boxHorizontalSpace, {marginVertical: 10}]}>
+          <View style={Styles.boxHorizontalCenter}>
             <Text style={Styles.textPriceRs}>R$</Text>
-            <Text style={Styles.textPrice}>{sorvete?.preco}</Text>
+            <Text style={Styles.textPrice}>
+              {sorvete?.preco?.toFixed(2)?.replace(".", ",").toString()}
+            </Text>
           </View>
-          <TouchableOpacity>
-            <Text>Compartilhar</Text>
+          <TouchableOpacity style={Styles.shareBtn} onPress={shareSorvete}>
+            <Text style={Styles.shareText}>Compartilhar</Text> 
+            <Ionicons name="share-social" color={"#6AAAFF"} size={20} />
           </TouchableOpacity>
         </View>
-        <View style={Styles.boxHorizontalCenter}>
-          <TouchableOpacity>
-            <Text>Adicionar ao carrinho</Text>
+        <View style={[Styles.boxHorizontalSpace, { marginTop: 10 }]}>
+          <TouchableOpacity style={[Styles.boxHorizontalCenter, Styles.btnCart]}>
+            <Ionicons name='cart-outline' size={20} color={"#fff"}/>
+            <Text style={Styles.textBtns}>Adicionar ao carrinho</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>- 1 +</Text>
-          </TouchableOpacity>
+          <View style={[Styles.boxHorizontalCenter, Styles.btnQuantidade]}>
+            <TouchableOpacity onPress={menosSorvete}>
+              <Text style={Styles.textBtns}> - </Text>
+            </TouchableOpacity>
+            <Text style={Styles.textBtns}> {quantidade} </Text>
+            <TouchableOpacity onPress={maisSorvete}>
+              <Text style={Styles.textBtns}>  + </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

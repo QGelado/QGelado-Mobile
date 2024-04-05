@@ -1,15 +1,33 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  titleCard:{
+  App:{
+    backgroundColor: '#fff',
+    flexGrow: 1,
+  },
+  infoSorvete:{
+    backgroundColor: '#fff',
+    flexGrow: 1,
+    padding:20,
+  },
+  imgSorvete:{
+    backgroundColor: '#E5F8FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+  },
+  titleSorvete:{
     fontFamily: 'poppins-bold',
     color: '#380000',
-    fontSize: 18,
+    fontSize: 32,
     margin: 0,
   },
-  descriptionCard:{
+  descriptionSorvete:{
     fontFamily: 'poppins-regular',
     color: '#380000',
+    fontSize: 14,
     margin: 0,
   },
 
@@ -82,13 +100,45 @@ export default StyleSheet.create({
   textPrice: {
     fontFamily:'titan-one',
     color:'#197CFF',
-    fontSize: 19,
+    fontSize: 35,
     margin: 0,
   },
   textPriceRs: {
     fontFamily:'titan-one',
     color:'#FF40A0',
-    fontSize: 12,
+    fontSize: 18,
     margin: 0,
   },
+  shareBtn:{
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    backgroundColor: '#E5F8FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 100,
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 5,
+  },
+  shareText:{
+    fontFamily: 'poppins-regular',
+    color: '#6AAAFF'
+  },
+  btnCart:{
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#FF90C8',
+    borderRadius: 100
+  },
+  btnQuantidade:{
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#197CFF',
+    borderRadius: 100
+  },
+  textBtns:{
+    fontFamily: 'titan-one',
+    color: '#fff',
+    fontSize: 16
+  }
 })
