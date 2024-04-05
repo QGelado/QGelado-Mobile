@@ -125,7 +125,7 @@ export default function Home() {
           </TouchableOpacity>
         ))}
         </View>
-        <Link to={{screen: 'Perfil-Usuario'}} style={{width:'100%'}}>
+        <Link to={{screen: 'Montar-Sorvete'}} style={{width:'100%'}}>
           <LinearGradient colors={['#197CFF', '#C3EFFF']} style={Styles.boxMontaSorvete}
           start={{x:0,y:1}}
           end={{x:1,y:0}}>

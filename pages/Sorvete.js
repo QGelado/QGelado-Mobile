@@ -103,7 +103,7 @@ const Sorvete = ({route}) => {
             </TouchableOpacity>
             <Text style={Styles.textBtns}> {quantidade} </Text>
             <TouchableOpacity onPress={maisSorvete}>
-              <Text style={Styles.textBtns}>  + </Text>
+              <Text style={Styles.textBtns}> + </Text>
             </TouchableOpacity>
           </LinearGradient>
         </View>
