@@ -39,7 +39,7 @@ export default function Home() {
       setSorvetes(json)
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Erro getSorvetes Home", error);
       return null
     })
   }

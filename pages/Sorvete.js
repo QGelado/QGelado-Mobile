@@ -5,11 +5,16 @@ import { Ionicons } from '@expo/vector-icons'
 import ViewShot, { captureRef } from 'react-native-view-shot'
 import * as Sharing from "expo-sharing";
 import { LinearGradient } from 'expo-linear-gradient'
+import { useCartStore } from '../store/cartStore'
 
 const Sorvete = ({route}) => {
     const { id } = route.params
     const [sorvete, setSorvete] = useState({})
     const [quantidade, setQuantidade] = useState(1)
+    const [cart, addToCart] = useCartStore((state) => [
+      state.cart,
+      state.addToCart
+    ])
     const ref = useRef()
     const getSorvetes = () => {
       fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao/${id}`, {
@@ -57,6 +62,10 @@ const Sorvete = ({route}) => {
 
     const addCart = () =>{
       Alert.alert(`${sorvete?.nome} foi adicionado ao carrinho!`)
+      Array.from({length: quantidade}).forEach(()=>{
+        addToCart(sorvete)
+      })
+      console.log(cart);
     }
 
     useEffect(() => {

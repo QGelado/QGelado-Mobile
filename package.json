@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@react-native-masked-view/masked-view": "^0.3.0",
     "@react-navigation/bottom-tabs": "*",
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
@@ -29,7 +30,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-share": "^10.1.0",
     "react-native-svg": "14.1.0",
-    "react-native-view-shot": "^3.8.0"
+    "react-native-view-shot": "^3.8.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

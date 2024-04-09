@@ -65,13 +65,15 @@ export default StyleSheet.create({
   textItems: {
     fontFamily: 'poppins-regular',
     fontSize: 10,
-    color: '#380000'
+    color: '#380000',
+    textAlign: 'center'
   },
   buttonCard: {
     color: '#E5F8FF',
     backgroundColor:'#C3EFFF',
     padding: 5,
     borderRadius: 100,
+    width: 30,
   },
   gradient:{
     padding: 3, 
@@ -84,5 +86,19 @@ export default StyleSheet.create({
   priceText:{
     fontFamily: 'poppins-regular',
     color: '#6AAAFF'
+  },
+  btnRoundedSm:{
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 100,
+    width: 'auto',
+    alignItems: 'center',
+    marginBottom: -8,
+    zIndex: 2
+  },
+  textBtnLarge:{
+    fontFamily: 'titan-one',
+    color: '#fff',
+    fontSize: 10
   },
 })

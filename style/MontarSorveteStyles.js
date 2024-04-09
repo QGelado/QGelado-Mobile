@@ -151,6 +151,12 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 18
   },
+  title:{
+    fontFamily: 'titan-one',
+    color: '#fff',
+    fontSize: 25,
+    textAlign: 'center'
+  },
   boxEscolher:{
     width: '100%',
     backgroundColor: '#fff',
@@ -174,10 +180,48 @@ export default StyleSheet.create({
     color: '#380000'
   },
   boxItems:{
-    height: '60%',
+    height: '58%',
     width: '100%',
     gap: 10,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  boxSorveteFinalizado: {
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: '#C3EFFF',
+    width: '90%',
+    gap: 10
+  },
+  btnQuantidade:{
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+    backgroundColor: '#197CFF',
+    borderRadius: 100,
+    width: 100,
+  },
+  descriptionSorvete:{
+    fontFamily: 'poppins-regular',
+    color: '#380000',
+    fontSize: 14,
+    margin: 0,
+  },
+  descriptionSorveteBold:{
+    fontFamily: 'poppins-bold',
+    color: '#380000',
+    fontSize: 15,
+    margin: 0,
+  },  
+  boxItemSorvete:{
+    height: 70,
+    width: 70,
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 5
+  },
 })
