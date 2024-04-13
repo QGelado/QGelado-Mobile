@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
+import TodosOsProdutos from '../pages/TodosOsProdutos';
 import Home from '../pages/Home';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
@@ -51,6 +52,33 @@ const Navbar = (props) => {
           tabBarInactiveTintColor: '#000000',
         })}
       />
+
+
+      <Tab.Screen
+          name="Visualizar-Todos-Produtos"
+          component={() => <TodosOsProdutos /> }
+          options={(props) => ({
+            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+            headerLeft: () => <OurStatusBarLeft />,
+            headerTitle: () => {},
+            headerStyle: { backgroundColor: '#E5F8FF' },
+            headerTintColor: '#fff',
+            tabBarIcon: ({ size, focused, color }) => {
+              return (
+                <Image
+                  style={{ width: size, height: size }}
+                  source={require('../assets/footer/footer-perfil-icon.png')}
+                />
+              );
+            },
+            tabBarLabel: 'Visualizar Todos Produtos',
+            tabBarActiveTintColor: '#FF40A0',
+            tabBarInactiveTintColor: '#000000',
+            tabBarButton: () => null,
+            tabBarVisible: false
+          })}
+      />
+
       <Tab.Screen
         name="Perfil-Usuario"
         component={PerfilUsuario}

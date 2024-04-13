@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Cadastro">
+      <Stack.Navigator initialRouteName="navbar">
         <Stack.Screen
           name="navbar"
           component={Navbar}
