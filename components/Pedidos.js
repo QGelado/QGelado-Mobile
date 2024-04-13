@@ -37,7 +37,7 @@ const Pedidos = ({item, navigation}) => {
       </View>
 
       <View style={styles.main__containerItens}>
-        <Text style={styles.containerItens__pedidosText}>R$ {item.sorvetes[0].nome}</Text>
+        <Text style={styles.containerItens__pedidosText}>{item.sorvetes[0].nome}</Text>
         <Text style={[styles.containerItens__pedidosText, {fontFamily: "poppins-regular"}]}>R$ {item.sorvetes[0].preco}</Text>
       </View>
 
