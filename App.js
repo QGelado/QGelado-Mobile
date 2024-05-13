@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Carrinho">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="navbar"
           component={Navbar}

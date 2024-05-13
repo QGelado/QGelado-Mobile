@@ -1,41 +1,61 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { useEffect, useState, useRef } from 'react'
+import {Image, StyleSheet, Text, TouchableOpacity, View, SafeAreaView} from 'react-native';
+import { useCartStore } from '../store/cartStore'
 
 const Carrinho = () => {
+  const [sorvetes, setSorvetes] = useCartStore((state) => [
+      state.cart,
+  ])
+
   return (
-    <View style={styles.container}>
-      <View style={styles.wrapperImageCheck}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.iconPlus}>V</Text>
-        </TouchableOpacity>
-        <Image
-          source={{
-            uri: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/5/14/1/FNM_060114-Chocolate-Ice-Cream-Recipe_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1400255820837.jpeg',
-          }}
-          style={styles.productImage}
-        />
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
+          {
+            sorvetes.map((sorvete) => {
+              return (
+                <>
+                  <TouchableOpacity style={styles.button}>
+                    <Text style={styles.iconPlus}>V</Text>
+                  </TouchableOpacity>
+                  <View style={styles.wrapperImageCheck}>
+                    <Image
+                      source={{
+                      uri:  `https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao/image/${sorvete?.imagem}`,
+                      }}
+                      style={styles.productImage}
+                    />
+                </View>
+                <View style={{justifyContent: 'space-between'}}>
+                  <View>
+                    <Text>{sorvete?.nome}</Text>
+                    <Text>R$ {sorvete?.preco?.toFixed(2)?.replace(".", ",").toString()}</Text>
+                  </View>
+                  <View style={styles.wrapperCardBottom}>
+                    <TouchableOpacity style={styles.button}>
+                      <Text style={{fontWeight: '600'}}>-</Text>
+                    </TouchableOpacity>
+                    <Text style={{paddingHorizontal: 12}}>3</Text>
+                    <TouchableOpacity style={[styles.button, {borderColor: 'green'}]}>
+                      <Text style={styles.iconPlus}>+</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                </>
+              )
+            }
+            )
+          }
       </View>
-      <View style={{justifyContent: 'space-between'}}>
-        <View>
-          <Text>Sorvete de chocolate</Text>
-          <Text>R$ 300</Text>
-        </View>
-        <View style={styles.wrapperCardBottom}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={{fontWeight: '600'}}>-</Text>
-          </TouchableOpacity>
-          <Text style={{paddingHorizontal: 12}}>3</Text>
-          <TouchableOpacity style={[styles.button, {borderColor: 'green'}]}>
-            <Text style={styles.iconPlus}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 export default Carrinho;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: '#E5F8FF',
+    height: '100%'
+  },
   container: {
     flexDirection: 'row',
     marginBottom: 20,
@@ -45,6 +65,7 @@ const styles = StyleSheet.create({
   wrapperImageCheck: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#E5F8FF',
   },
   productImage: {
     width: 80,

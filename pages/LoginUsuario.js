@@ -1,3 +1,4 @@
+import React, { useEffect, useState, useRef } from 'react';
 import {
     Text,
     StyleSheet,
@@ -18,12 +19,43 @@ import { useFonts } from 'expo-font';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 
+import { useUserStore } from '../store/userStore';
+
 const LoginUsuario = ({ navigation }) => {
+    const [user, setUser] = useUserStore((state) => [
+        state.user,
+        state.signIn
+    ])
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
     const [fontsLoaded] = useFonts({
       'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
       'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
       'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
     });
+
+    const signIn = () => {
+      fetch('https://6sncggx0-3000.brs.devtunnels.ms/usuario/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => {
+          response.json()
+        })
+        .then((json) =>{ 
+          console.log(json)
+          setUser(json);
+          navigation.navigate("Home")
+        })
+    }
   
     return (
       <SafeAreaView style={styles.container__main}>
@@ -38,6 +70,7 @@ const LoginUsuario = ({ navigation }) => {
                 <TextInput
                   style={styles.textInput}
                   placeholder={'Digite o seu email'}
+                  onChangeText={email => setEmail(email)}
                 />
               </View>
   
@@ -47,12 +80,13 @@ const LoginUsuario = ({ navigation }) => {
                   style={styles.textInput}
                   placeholder={'Digite sua senha'}
                   secureTextEntry={true}
+                  onChangeText={pwd => setPassword(pwd)}
                 />
               </View>
   
               <Pressable
                 style={styles.textInputSalvar}
-                onPress={() => navigation.navigate('navbar')}>
+                onPress={signIn}>
                 <Text
                   style={{
                     textAlign: 'center',
@@ -63,14 +97,15 @@ const LoginUsuario = ({ navigation }) => {
               </Pressable>
   
               <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                <Text style={styles.textLogin}> Já possui uma conta? Faça </Text>
-                <Pressable>
+                <Text style={styles.textLogin}> Não possui uma conta?</Text>
+                <Pressable
+                  onPress={() => navigation.navigate('Cadastro')}>
                   <Text
                     style={[
                       styles.textLogin,
                       { textDecorationLine: 'underline' },
                     ]}>
-                    Login
+                    Cadastre-se
                   </Text>
                 </Pressable>
               </View>
