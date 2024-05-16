@@ -141,7 +141,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
               <View key={acompanhamento?._id} style={Styles.boxItem}>
                 <Image
                   source={{
-                    uri: `https://6sncggx0-3000.brs.devtunnels.ms/acompanhamento/image/${acompanhamento?.imagem}`,
+                    uri: `https://6sncggx0-3000.brs.devtunnels.ms${acompanhamento?.imagem}`,
                   }}
                   style={{ width: 50, height: 50, objectFit: "contain" }}
                 />
@@ -170,7 +170,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
           >
             <Image
               source={{
-                uri: `https://6sncggx0-3000.brs.devtunnels.ms/sabor-sorvete/image/${sabor?.imagem}`,
+                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sabor?.imagem}`,
               }}
               style={{ width: 40, height: 40, objectFit: "contain" }}
             />
@@ -186,7 +186,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
         >
           <Image
             source={{
-              uri: `https://6sncggx0-3000.brs.devtunnels.ms/recipiente/image/${sorvete?.recipiente?.imagem}`,
+              uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.recipiente?.imagem}`,
             }}
             style={{ width: 40, height: 40, objectFit: "contain" }}
           />

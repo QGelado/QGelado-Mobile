@@ -83,14 +83,14 @@ const MontarSorveteFinalizado = ({route}) => {
                     ))
                 }
             </View>
-            <ScrollView>
+            <ScrollView horizontal={true}>
                 <View style={[Styles.boxHorizontalStart]}>
                     {
                         sorvete?.acompanhamentos?.map((acompanhamento) => (
                         <View key={acompanhamento?._id} style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                             <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms/acompanhamento/image/${acompanhamento?.imagem}`,
+                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${acompanhamento?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                             />
@@ -103,7 +103,7 @@ const MontarSorveteFinalizado = ({route}) => {
                         <View key={sabor?._id} style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                             <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms/sabor-sorvete/image/${sabor?.imagem}`,
+                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sabor?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                             />
@@ -114,7 +114,7 @@ const MontarSorveteFinalizado = ({route}) => {
                     <View style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                         <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms/recipiente/image/${sorvete?.recipiente?.imagem}`,
+                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.recipiente?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                         />

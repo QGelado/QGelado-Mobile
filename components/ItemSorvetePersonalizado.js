@@ -24,11 +24,11 @@ const ItemSorvetePersonalizado = ({item, tipo, selected, onDelete, onSelect, len
                     }}>
                     <Image
                         source={{
-                            uri: `https://6sncggx0-3000.brs.devtunnels.ms/${url}/image/${item?.imagem}`,
+                            uri: `https://6sncggx0-3000.brs.devtunnels.ms${item?.imagem}`,
                         }}
                         style={{ width: '100%', height: 50, objectFit: "contain" }}
                         />
-                    <Text style={Styles.textItems}>{item?.sabor ? item?.sabor : tipo=== "Recipiente" ? item?.tipo : item?.nome}</Text>
+                    <Text style={Styles.textItems}>{item?.sabor ? item?.sabor : tipo === "Recipiente" ? item?.tipo : item?.nome}</Text>
                 </TouchableOpacity>
             </LinearGradient>
         </View>

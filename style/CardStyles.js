@@ -6,6 +6,7 @@ export default StyleSheet.create({
     color: '#380000',
     fontSize: 18,
     margin: 0,
+    width: '100%'
   },
   descriptionCard:{
     fontFamily: 'poppins-regular',

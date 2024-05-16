@@ -31,6 +31,7 @@ const Sorvete = ({route}) => {
       })
       .then(( json ) => {
         setSorvete(json)
+        console.log(json);
       })
       .catch((error) => {
         console.log(error);
@@ -70,7 +71,7 @@ const Sorvete = ({route}) => {
 
     useEffect(() => {
       getSorvetes()
-    }, [])
+    }, [id])
   return (
     <View style={Styles.App} ref={ref}>
       <View style={Styles.imgSorvete}>

@@ -5,6 +5,7 @@ export default StyleSheet.create({
     backgroundColor: '#E5F8FF',
     flexGrow: 1,
     alignItems: 'center',
+    paddingBottom: 10
   },
   imgSorvete:{
     backgroundColor: '#E5F8FF',
