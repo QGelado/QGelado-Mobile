@@ -21,9 +21,9 @@ const CardHome = ({ sorvete }) => {
         />
       </View>
       <View style={Styles.boxVerticalStart}>
-        <Text style={Styles.titleCard}>{sorvete?.nome?.slice(0, 16)}</Text>
+        <Text style={Styles.titleCard}>{sorvete?.nome?.length > 13 ? sorvete?.nome.slice(0, 13) + "..." : sorvete?.nome}</Text>
         <Text style={Styles.descriptionCard}>
-          {sorvete?.descricao?.slice(0, 20) + "..."}
+          {sorvete?.marca ? sorvete?.descricao?.slice(0, 20) + "..." : sorvete?.sabor}
         </Text>
         <View style={Styles.boxHorizontalSpace}>
           <View style={Styles.boxHorizontalCenter}>

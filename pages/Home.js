@@ -16,6 +16,7 @@ export default function Home() {
   const [input, setInput] = useState('')
   const tags = ['Todos', 'Sorvete de Massa', 'Picolé']
   const [sorvetes, setSorvetes] = useState([])
+  const [sabores, setSabores] = useState([])
   const [user, setUser] = useState(null)
 
   const filterSorvetes = () => {
@@ -40,6 +41,25 @@ export default function Home() {
     })
     .catch((error) => {
       console.log("Erro getSorvetes Home", error);
+      return null
+    })
+    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sabor-sorvete`, {
+      method: 'GET'
+    })
+    .then((response) => {
+      const statusCode = response.status;
+  
+      if(statusCode == 200) {
+        return response.json();
+      }
+
+      return Promise.reject(response);
+    })
+    .then(( json ) => {
+      setSabores(json)
+    })
+    .catch((error) => {
+      console.log("Erro getSorvetes Home Sabor", error);
       return null
     })
   }
@@ -143,9 +163,9 @@ export default function Home() {
           }
           
           {
-            sorvetes.length > 0 && sorvetes?.filter((product) => {
-              if(filter?.text == "" ||
-                Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.text.toLowerCase()))){
+            sorvetes.length > 0 && [...sorvetes, ...sabores]?.filter((product) => {
+              if((filter?.text == "" && filter?.tag == 'Todos') ||
+              (filter?.text !== "" && Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.text.toLowerCase()))) || (filter?.tag === 'Sorvete de Massa' && !product.marca) || (filter?.tag === 'Picolé' && product.marca)){
                 return product
               }
             })?.slice(0,4).map((sorvete) => (
