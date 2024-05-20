@@ -17,6 +17,7 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
+import route from '../BackendEndpoint'
 
 import { useUserStore } from '../store/userStore';
 
@@ -36,7 +37,7 @@ const LoginUsuario = ({ navigation }) => {
 
     const signIn = () => {
       console.log('Fazendo login');
-      fetch('https://6sncggx0-3000.brs.devtunnels.ms/usuario/login', {
+      fetch(`${route}/usuario/login`, {
         method: 'POST',
         body: JSON.stringify({
           email: email,

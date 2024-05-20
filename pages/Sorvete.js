@@ -6,6 +6,7 @@ import ViewShot, { captureRef } from 'react-native-view-shot'
 import * as Sharing from "expo-sharing";
 import { LinearGradient } from 'expo-linear-gradient'
 import { useCartStore } from '../store/cartStore'
+import routes from '../BackendEndpoint'
 
 const Sorvete = ({route}) => {
     const { id } = route.params
@@ -17,7 +18,7 @@ const Sorvete = ({route}) => {
     ])
     const ref = useRef()
     const getSorvetes = () => {
-      fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao/${id}`, {
+      fetch(`${routes}/sorvete-padrao/${id}`, {
         method: 'GET'
       })
       .then((response) => {
@@ -77,7 +78,7 @@ const Sorvete = ({route}) => {
       <View style={Styles.imgSorvete}>
         <Image 
           source={{
-            uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.imagem}`,
+            uri: `${routes}${sorvete?.imagem}`,
           }}
           style={{ width: 220, height: 220, objectFit: "contain" }}/>
       </View>

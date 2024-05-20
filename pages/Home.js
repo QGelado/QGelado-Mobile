@@ -6,6 +6,7 @@ import { Link } from '@react-navigation/native';
 import CardHome from '../components/CardHome';
 import CardLoading from '../components/CardLoading';
 import * as SecureStore from 'expo-secure-store';
+import route from '../BackendEndpoint'
 
 export default function Home() {
   const [filter, setFilter] = useState('')
@@ -18,7 +19,7 @@ export default function Home() {
   }
 
   const getSorvetes = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao`, {
+    fetch(`${route}/sorvete-padrao`, {
       method: 'GET'
     })
     .then((response) => {
@@ -43,7 +44,7 @@ export default function Home() {
       const idRecuperado = await SecureStore.getItemAsync('id_usuario');
       console.log("User", idRecuperado);
       if(idRecuperado){
-        fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${idRecuperado}`, {
+        fetch(`${route}/usuario/${idRecuperado}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${tokenRecuperado}`,

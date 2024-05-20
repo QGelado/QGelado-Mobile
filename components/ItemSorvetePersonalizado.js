@@ -2,6 +2,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import route from '../BackendEndpoint'
+
 
 const ItemSorvetePersonalizado = ({item, tipo, selected, onDelete, onSelect, length}) => {
     const url = tipo === 'Sabor' ? 'sabor-sorvete' : tipo === 'Recipiente' ? 'recipiente' : 'acompanhamento'
@@ -23,7 +25,7 @@ const ItemSorvetePersonalizado = ({item, tipo, selected, onDelete, onSelect, len
                     }}>
                     <Image
                         source={{
-                            uri: `https://6sncggx0-3000.brs.devtunnels.ms${item?.imagem}`,
+                            uri: `${route}${item?.imagem}`,
                         }}
                         style={{ width: '100%', height: 50, objectFit: "contain" }}
                         />

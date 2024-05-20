@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import ItemSorvetePersonalizado from "../components/ItemSorvetePersonalizado";
 import MaskedView from "@react-native-masked-view/masked-view";
+import routes from '../BackendEndpoint'
 
 const MontarSorveteAcompanhamento = ({ route }) => {
   const { payload } = route.params;
@@ -15,7 +16,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
   const [selected, setSelected] = useState([]);
   const [sorvete, setSorvete] = useState(payload);
   const getAcompanhamentos = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/acompanhamento`, {
+    fetch(`${routes}/acompanhamento`, {
       method: "GET",
     })
       .then((response) => {
@@ -141,7 +142,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
               <View key={acompanhamento?._id} style={Styles.boxItem}>
                 <Image
                   source={{
-                    uri: `https://6sncggx0-3000.brs.devtunnels.ms${acompanhamento?.imagem}`,
+                    uri: `${routes}${acompanhamento?.imagem}`,
                   }}
                   style={{ width: 50, height: 50, objectFit: "contain" }}
                 />
@@ -170,7 +171,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
           >
             <Image
               source={{
-                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sabor?.imagem}`,
+                uri: `${routes}${sabor?.imagem}`,
               }}
               style={{ width: 40, height: 40, objectFit: "contain" }}
             />
@@ -186,7 +187,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
         >
           <Image
             source={{
-              uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.recipiente?.imagem}`,
+              uri: `${routes}${sorvete?.recipiente?.imagem}`,
             }}
             style={{ width: 40, height: 40, objectFit: "contain" }}
           />

@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import ItemSorvetePersonalizado from "../components/ItemSorvetePersonalizado";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { useCartStore } from '../store/cartStore';
+import routes from '../BackendEndpoint'
 
 const MontarSorveteFinalizado = ({route}) => {
     const sorvete = route.params.payload
@@ -90,7 +91,7 @@ const MontarSorveteFinalizado = ({route}) => {
                         <View key={acompanhamento?._id} style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                             <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${acompanhamento?.imagem}`,
+                                uri: `${routes}${acompanhamento?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                             />
@@ -103,7 +104,7 @@ const MontarSorveteFinalizado = ({route}) => {
                         <View key={sabor?._id} style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                             <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sabor?.imagem}`,
+                                uri: `${routes}${sabor?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                             />
@@ -114,7 +115,7 @@ const MontarSorveteFinalizado = ({route}) => {
                     <View style={[Styles.boxVerticalCenter, Styles.boxItemSorvete, { flexWrap: 'nowrap' }]}>
                         <Image
                             source={{
-                                uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.recipiente?.imagem}`,
+                                uri: `${routes}${sorvete?.recipiente?.imagem}`,
                             }}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                         />

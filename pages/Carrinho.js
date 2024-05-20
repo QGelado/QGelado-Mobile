@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View, SafeAreaView} from 'react-native';
 import { useCartStore } from '../store/cartStore'
+import route from '../BackendEndpoint'
 
 const Carrinho = () => {
   const [sorvetes, setSorvetes] = useCartStore((state) => [
@@ -19,7 +20,7 @@ const Carrinho = () => {
                   <View style={styles.wrapperImageCheck}>
                     <Image
                       source={{
-                      uri:  `https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao/image/${sorvete?.imagem}`,
+                      uri:  `${route}/sorvete-padrao/image/${sorvete?.imagem}`,
                       }}
                       style={styles.productImage}
                     />

@@ -3,6 +3,7 @@ import { View, Image, Text, TouchableOpacity, Alert, StyleSheet } from "react-na
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useCartStore } from "../store/cartStore";
+import route from '../BackendEndpoint'
 
 const CardHome = ({ sorvete }) => {
   const navigation = useNavigation();
@@ -21,7 +22,7 @@ const CardHome = ({ sorvete }) => {
       <View style={Styles.imgProduct}>
         <Image
           source={{
-            uri: `https://6sncggx0-3000.brs.devtunnels.ms${sorvete?.imagem}`,
+            uri: `${route}${sorvete?.imagem}`,
           }}
           style={{ width: 50, height: 60, objectFit: "contain" }}
         />

@@ -14,9 +14,11 @@ import {
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 import { useNavigation } from '@react-navigation/native';
+import route from '../BackendEndpoint'
+import * as SecureStore from 'expo-secure-store';
 
-const ExcluirUsuario = ({route}) => {
-  const id  = route?.params?.id;
+const ExcluirUsuario = async () => {
+  const id = await SecureStore.getItemAsync('id_usuario');
   const navigation = useNavigation()
 
   const [usuario, setUsuario] = useState({})
@@ -24,7 +26,7 @@ const ExcluirUsuario = ({route}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const deletarUsuario = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${id}`, {
+    fetch(`${route}/usuario/${id}`, {
         method: 'DELETE'
       })
       .then((response) => {
@@ -47,7 +49,7 @@ const ExcluirUsuario = ({route}) => {
   }
 
   const getUsuario = () => {
-      fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${id}`, {
+      fetch(`${route}/usuario/${id}`, {
         method: 'GET'
       })
       .then((response) => {

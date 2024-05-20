@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import ItemSorvetePersonalizado from "../components/ItemSorvetePersonalizado";
 import MaskedView from "@react-native-masked-view/masked-view";
+import routes from '../BackendEndpoint'
 
 const MontarSorvete = ({route}) => {
   const payload = route?.params?.payload
@@ -19,7 +20,7 @@ const MontarSorvete = ({route}) => {
   });
   const navigation = useNavigation()
   const getSabores = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sabor-sorvete`, {
+    fetch(`${routes}/sabor-sorvete`, {
       method: "GET",
     })
       .then((response) => {
@@ -54,7 +55,7 @@ const MontarSorvete = ({route}) => {
       });
   };
   const getRecipientes = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/recipiente`, {
+    fetch(`${routes}/recipiente`, {
       method: "GET",
     })
       .then((response) => {
@@ -211,7 +212,7 @@ const MontarSorvete = ({route}) => {
                   <TouchableOpacity key={sabor?._id} style={Styles.boxItem} onPress={() => changeSabor(sabor)}>
                     <Image
                       source={{
-                        uri: `https://6sncggx0-3000.brs.devtunnels.ms${sabor?.imagem}`,
+                        uri: `${routes}${sabor?.imagem}`,
                       }}
                       style={{ width: 50, height: 50, objectFit: "contain" }}
                     />
@@ -226,7 +227,7 @@ const MontarSorvete = ({route}) => {
                   <TouchableOpacity key={recipiente?._id} style={Styles.boxItem} onPress={() => changeRecipiente(recipiente)}>
                     <Image
                       source={{
-                        uri: `https://6sncggx0-3000.brs.devtunnels.ms${recipiente?.imagem}`,
+                        uri: `${routes}${recipiente?.imagem}`,
                       }}
                       style={{ width: 50, height: 50, objectFit: "contain" }}
                     />
