@@ -9,9 +9,11 @@ import {
   Pressable,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons'
 
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
+import Home from '../pages/Home';
 import Carrinho from '../pages/Carrinho';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
@@ -25,6 +27,32 @@ const Navbar = (props) => {
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}>
+        
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            if(focused){
+              return (
+                  <Ionicons name="home" size={size} color="#FF40A0" />
+                );
+              }else{
+                return (
+                  <Ionicons name="home-outline" size={size} color="#FF40A0" />
+              )
+            }
+          },
+          tabBarLabel: 'Home',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+        })}
+      />
       <Tab.Screen
         name="Perfil-Usuario"
         component={PerfilUsuario}
@@ -65,7 +93,7 @@ const Navbar = (props) => {
               />
             );
           },
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Editar',
           tabBarActiveTintColor: '#FF40A0',
           tabBarInactiveTintColor: '#000000',
         })}
