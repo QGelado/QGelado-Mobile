@@ -13,10 +13,12 @@ import { Ionicons } from '@expo/vector-icons'
 
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
+import VisualizaTodosPedidos from '../pages/VisualizaTodosPedidos';
 import TodosOsProdutos from '../pages/TodosOsProdutos';
 import Home from '../pages/Home';
 import Sorvete from '../pages/Sorvete';
 import Carrinho from '../pages/Carrinho';
+import VisualizaUmPedido from '../pages/VisualizaUmPedido';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
 import MontarSorvete from '../pages/MontarSorvete';
@@ -31,7 +33,29 @@ const Navbar = (props) => {
     <Tab.Navigator
       tabBarOptions={{
         keyboardHidesTabBar: true,
-      }}>
+      }}
+      >
+
+      <Tab.Screen
+        name="Visualizar-Pedidos"
+        component={() => <VisualizaTodosPedidos navigation={props.navigation} />}
+        options={(props) => ({
+        headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+        tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Perfil',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+          tabBarButton: () => null,
+          tabBarVisible: false
+        })}
+      />
         
       <Tab.Screen
         name="Home"
@@ -78,6 +102,7 @@ const Navbar = (props) => {
               );
             },
             tabBarLabel: 'Visualizar Todos Produtos',
+            tabBarLabel: 'Perfil',
             tabBarActiveTintColor: '#FF40A0',
             tabBarInactiveTintColor: '#000000',
             tabBarButton: () => null,
@@ -85,6 +110,33 @@ const Navbar = (props) => {
           })}
       />
 
+      <Tab.Screen
+          name="Visualiza-Pedido"
+          component={() => <VisualizaUmPedido /> }
+          options={(props) => ({
+            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+            headerLeft: () => <OurStatusBarLeft />,
+            headerTitle: () => {},
+            headerStyle: { backgroundColor: '#E5F8FF' },
+            headerTintColor: '#fff',
+            tabBarIcon: ({ size, focused, color }) => {
+              return (
+                <Image
+                  style={{ width: size, height: size }}
+                  source={require('../assets/footer/footer-perfil-icon.png')}
+                />
+              );
+            },
+            tabBarLabel: 'Visualizar Um Pedido',
+            tabBarLabel: 'Perfil',
+            tabBarActiveTintColor: '#FF40A0',
+            tabBarInactiveTintColor: '#000000',
+            tabBarButton: () => null,
+            tabBarVisible: false
+          })}
+      />
+
+      
       <Tab.Screen
         name="Perfil-Usuario"
         component={PerfilUsuario}
