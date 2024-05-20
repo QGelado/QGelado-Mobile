@@ -12,14 +12,17 @@ import {
 function OurStatusBarRight(props) {
   
   return (
-    <Pressable onPress={() => props.navegacao.navigate('Perfil-Usuario')}>
+    <Pressable onPress={() => props.navegacao.navigate('Perfil-Usuario')} 
+      style={{
+        backgroundColor: '#C3EFFF',
+        borderRadius: 100,
+        marginRight: 20,
+        padding: 5
+      }}>
       <Image
         style={{
-          width: 20,
-          height: 20,
-          backgroundColor: '#C3EFFF',
-          borderRadius: 100,
-          marginRight: 20
+          width: 25,
+          height: 25,
         }}
         source={require('../assets/statusBar/profile-icone.png')}
       />
