@@ -9,17 +9,13 @@ import CardLoading from '../components/CardLoading';
 import * as SecureStore from 'expo-secure-store';
 
 export default function Home() {
-  const [filter, setFilter] = useState({
-    text: '',
-    tag: 'Todos'
-  })
+  const [filter, setFilter] = useState('')
   const [input, setInput] = useState('')
-  const tags = ['Todos', 'Sorvete de Massa', 'Picolé']
   const [sorvetes, setSorvetes] = useState([])
   const [user, setUser] = useState(null)
 
   const filterSorvetes = () => {
-    setFilter({...filter, text: input})
+    setFilter(input)
   }
 
   const getSorvetes = () => {
@@ -39,7 +35,7 @@ export default function Home() {
       setSorvetes(json)
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Erro getSorvetes Home", error);
       return null
     })
   }
@@ -116,16 +112,7 @@ export default function Home() {
             <Ionicons name="search" size={18} color="#FF40A0" />
           </TouchableOpacity>
         </View>
-        <View style={Styles.boxHorizontalStart}>
-        {tags?.map((tag) => (
-          <TouchableOpacity style={{...Styles.chip, backgroundColor: filter?.tag === tag ? '#FF40A0' : '#FF90C8'}} onPress={() => setFilter({...filter, tag: tag})}>
-            <Text style={Styles.textChip}>
-              {tag}
-            </Text>
-          </TouchableOpacity>
-        ))}
-        </View>
-        <Link to={{screen: 'Perfil-Usuario'}} style={{width:'100%'}}>
+        <Link to={{screen: 'Montar-Sorvete'}} style={{width:'100%'}}>
           <LinearGradient colors={['#197CFF', '#C3EFFF']} style={Styles.boxMontaSorvete}
           start={{x:0,y:1}}
           end={{x:1,y:0}}>
@@ -143,9 +130,11 @@ export default function Home() {
           }
           
           {
-            sorvetes.length > 0 && sorvetes?.filter((product) => {
-              if(filter?.text == "" ||
-                Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.text.toLowerCase()))){
+            sorvetes.length > 0 && 
+            sorvetes
+              ?.filter((product) => {
+              if(filter == "" ||
+              (filter !== "" && Object.keys(product).some((key) => typeof product?.[key] == 'string' && product?.[key]?.toLowerCase().includes(filter?.toLowerCase())))){
                 return product
               }
             })?.slice(0,4).map((sorvete) => (

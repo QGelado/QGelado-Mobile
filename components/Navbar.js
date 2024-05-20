@@ -18,6 +18,9 @@ import Sorvete from '../pages/Sorvete';
 import Carrinho from '../pages/Carrinho';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
+import MontarSorvete from '../pages/MontarSorvete';
+import MontarSorveteAcompanhamento from '../pages/MontarSorveteAcompanhamento';
+import MontarSorveteFinalizado from '../pages/MontarSorveteFinalizado';
 
 
 const Tab = createBottomTabNavigator();
@@ -82,6 +85,7 @@ const Navbar = (props) => {
         component={Sorvete}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
           headerStyle: { backgroundColor: '#E5F8FF' },
           headerTintColor: '#fff',
@@ -94,6 +98,79 @@ const Navbar = (props) => {
             );
           },
           tabBarLabel: 'Sorvete',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+          tabBarButton: () => null,
+          tabBarVisible: false
+        })}
+      />
+
+      <Tab.Screen
+        name="Montar-Sorvete"
+        component={MontarSorvete}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Montar-Sorvete',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+          tabBarButton: () => null,
+          tabBarVisible: false
+        })}
+      />
+      <Tab.Screen
+        name="Montar-Sorvete-Acompanhamento"
+        component={MontarSorveteAcompanhamento}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Montar-Sorvete-Acompanhamento',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+          tabBarButton: () => null,
+          tabBarVisible: false
+        })}
+      />
+      <Tab.Screen
+        name="Montar-Sorvete-Finalizado"
+        component={MontarSorveteFinalizado}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Montar-Sorvete-Finalizado',
           tabBarActiveTintColor: '#FF40A0',
           tabBarInactiveTintColor: '#000000',
           tabBarButton: () => null,

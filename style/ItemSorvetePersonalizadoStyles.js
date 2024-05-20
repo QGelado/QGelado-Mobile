@@ -1,19 +1,6 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  titleCard:{
-    fontFamily: 'poppins-bold',
-    color: '#380000',
-    fontSize: 18,
-    margin: 0,
-    width: '100%'
-  },
-  descriptionCard:{
-    fontFamily: 'poppins-regular',
-    color: '#380000',
-    margin: 0,
-  },
-
   boxVerticalCenter: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -43,7 +30,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 5,
+    gap: 20,
   },
   boxHorizontalSpace: {
     flexDirection: 'row',
@@ -59,37 +46,59 @@ export default StyleSheet.create({
     gap: 10,
     width: '100%'
   },
-  cardProduct: {
-    backgroundColor:'#fff',
-    borderRadius: 20,
-    flexGrow: 1,
-    width: '45%',
-    maxWidth: '48%'
+  boxVerticalEnd: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    gap: 10,
+    width: '100%'
   },
-  imgProduct: {
-    backgroundColor:'#F4FCFF',
-    borderRadius: 20,
+  boxSorvete:{
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
     width: '100%',
-    height: 110,
+    height:"100%",
     alignItems: 'center',
     justifyContent: 'center'
   },
+  textItems: {
+    fontFamily: 'poppins-regular',
+    fontSize: 10,
+    color: '#380000',
+    textAlign: 'center'
+  },
   buttonCard: {
-    color: '#FF90C8',
-    backgroundColor:'#FFD7EB',
+    color: '#E5F8FF',
+    backgroundColor:'#C3EFFF',
     padding: 5,
     borderRadius: 100,
+    width: 30,
   },
-  textPrice: {
-    fontFamily:'titan-one',
-    color:'#197CFF',
-    fontSize: 19,
-    margin: 0,
+  gradient:{
+    padding: 3, 
+    borderRadius: 12, 
+    width: 100, 
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  textPriceRs: {
-    fontFamily:'titan-one',
-    color:'#FF40A0',
-    fontSize: 12,
-    margin: 0,
+  priceText:{
+    fontFamily: 'poppins-regular',
+    color: '#6AAAFF'
+  },
+  btnRoundedSm:{
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 100,
+    width: 'auto',
+    alignItems: 'center',
+    marginBottom: -8,
+    zIndex: 2
+  },
+  textBtnLarge:{
+    fontFamily: 'titan-one',
+    color: '#fff',
+    fontSize: 10
   },
 })
