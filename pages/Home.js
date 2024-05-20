@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   const getSorvetes = () => {
-    fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao`, {
+    fetch(`https://r7b6tzdg-3000.brs.devtunnels.ms/sorvete-padrao`, {
       method: 'GET'
     })
     .then((response) => {
@@ -142,7 +142,7 @@ export default function Home() {
             ))
           }
         </View>
-        <Link to={{screen: 'Perfil-Usuario'}} style={Styles.linkMore}>
+        <Link to={{screen: 'Visualizar-Todos-Produtos'}} style={Styles.linkMore}>
           <Text style={Styles.more}>{">"}</Text>
         </Link>
       </SafeAreaView>
