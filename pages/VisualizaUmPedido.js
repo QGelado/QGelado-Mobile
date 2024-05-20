@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, FlatList, Image, Dimensions } from 'react-native';
-import { useFonts } from 'expo-font';
 import {LinearGradient} from 'expo-linear-gradient';
 import * as SecureStore from 'expo-secure-store';
 import route from '../BackendEndpoint';
@@ -10,12 +9,6 @@ const VisualizaUmPedido = (props) => {
   
   const [dadosPedidos, setDadosPedidos] = useState([{}]);
   const [colorStatusBackground, setColorStatusBackground] = useState(["#FEF2E5", "#CD6200"]);
-
-  const [fontsLoaded] = useFonts({
-    'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-    'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-  });
 
   useEffect(() => {
     async function recuperaDadosUsuario(){

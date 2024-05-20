@@ -13,6 +13,7 @@ import React, { useEffect } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFonts } from 'expo-font';
 
 import CadastroUsuario from './pages/CadastroUsuario';
 import LoginUsuario from './pages/LoginUsuario';
@@ -22,6 +23,11 @@ import Navbar from './components/Navbar';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'titan-one': require('./assets/fonts/TitanOne-Regular.ttf'),
+    'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
+    'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
+  });
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">

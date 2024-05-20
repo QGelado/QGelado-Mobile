@@ -10,17 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import { useFonts } from 'expo-font';
-
-
-
 const PerfilUsuario = ({ navigation }) => {
-
-  const [fontsLoaded] = useFonts({
-    'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-    'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-  });
 
   return (
     <SafeAreaView style={styles.container__main}>

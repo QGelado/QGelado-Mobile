@@ -6,7 +6,6 @@ const Carrinho = () => {
   const [sorvetes, setSorvetes] = useCartStore((state) => [
       state.cart,
   ])
-
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text, SafeAreaView, StyleSheet, View, FlatList, TextInput,TouchableOpacity } from 'react-native';
-import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons'
 import * as SecureStore from 'expo-secure-store';
 
@@ -26,16 +25,11 @@ const VisualzaTodosPedidos = (props) => {
     }
   }
 
-  const [fontsLoaded] = useFonts({
-    'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-    'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-  });
-
   useEffect(() => {
     async function recuperaDadosUsuario(){
         const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
         const idRecuperado = await SecureStore.getItemAsync('id_usuario');
+        console.log("Userid", idRecuperado);
 
         fetch(`${route}/pedidos/busca?idUsuario=${idRecuperado}`, {
           method: 'GET',
@@ -122,7 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: 10,
-    width: '100%'
+    width: '100%',
+
   },
   inputFilter: {
     backgroundColor: '#fff',

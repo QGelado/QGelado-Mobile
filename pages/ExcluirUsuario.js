@@ -11,20 +11,15 @@ import {
   Dimensions,
 } from 'react-native';
 
-import { useFonts } from 'expo-font';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
+import { useNavigation } from '@react-navigation/native';
 
 const ExcluirUsuario = ({route}) => {
   const id  = route?.params?.id;
+  const navigation = useNavigation()
 
   const [usuario, setUsuario] = useState({})
-
-  const [fontsLoaded] = useFonts({
-    'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-    'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-  });
 
   const [modalVisible, setModalVisible] = useState(false);
 

@@ -17,7 +17,6 @@ import {
 import { useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 
-import { useFonts } from 'expo-font';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 import route from '../BackendEndpoint';
@@ -42,12 +41,6 @@ const CadastroUsuario = ({ navigation }) => {
   const [senha, setSenha] = useState('');
   const [telefone, setTelefone] = useState('');
   const [endereco, setEndereco] = useState('');
-
-  const [fontsLoaded] = useFonts({
-    'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-    'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-  });
 
   function cadastraUsuarioAPI() {
     const obj = {
@@ -170,7 +163,7 @@ const CadastroUsuario = ({ navigation }) => {
 
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Text style={styles.textLogin}> Já possui uma conta? Faça </Text>
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate('Login')}>
                 <Text
                   style={[
                     styles.textLogin,

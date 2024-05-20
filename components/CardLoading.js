@@ -1,6 +1,5 @@
 import React from "react";
-import { View } from "react-native";
-import Styles from "../style/CardStyles";
+import { View, StyleSheet } from "react-native";
 import { MotiView } from 'moti'
 import { Skeleton } from 'moti/skeleton'
 
@@ -25,5 +24,60 @@ const CardLoading = () => {
     </MotiView>
   );
 };
+
+const Styles = StyleSheet.create({
+  boxVerticalCenter: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    width: '100%'
+  },
+  boxVerticalStart: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: 10,
+    gap: -5
+  },
+  boxVerticalStartLoader: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: 10,
+    gap: 5
+  },
+  boxHorizontalCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 5,
+  },
+  boxHorizontalSpace: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+    width: '100%'
+  },
+  boxHorizontalStart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: 10,
+    width: '100%'
+  },
+  cardProduct: {
+    backgroundColor:'#fff',
+    borderRadius: 20,
+    flexGrow: 1,
+    width: '45%',
+    maxWidth: '48%'
+  },
+})
 
 export default CardLoading;

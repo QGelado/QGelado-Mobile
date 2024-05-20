@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -7,24 +7,23 @@ import {
   Dimensions,
   Image,
   Pressable,
-} from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'
+} from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons, AntDesign, MaterialIcons } from "@expo/vector-icons";
 
-import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
-import PerfilUsuario from '../pages/PerfilUsuario';
-import VisualizaTodosPedidos from '../pages/VisualizaTodosPedidos';
-import TodosOsProdutos from '../pages/TodosOsProdutos';
-import Home from '../pages/Home';
-import Sorvete from '../pages/Sorvete';
-import Carrinho from '../pages/Carrinho';
-import VisualizaUmPedido from '../pages/VisualizaUmPedido';
-import OurStatusBarLeft from './OurStatusBarLeft';
-import OurStatusBarRight from './OurStatusBarRight';
-import MontarSorvete from '../pages/MontarSorvete';
-import MontarSorveteAcompanhamento from '../pages/MontarSorveteAcompanhamento';
-import MontarSorveteFinalizado from '../pages/MontarSorveteFinalizado';
-
+import EditarPerfilUsuario from "../pages/EditarPerfilUsuario";
+import PerfilUsuario from "../pages/PerfilUsuario";
+import VisualizaTodosPedidos from "../pages/VisualizaTodosPedidos";
+import TodosOsProdutos from "../pages/TodosOsProdutos";
+import Home from "../pages/Home";
+import Sorvete from "../pages/Sorvete";
+import Carrinho from "../pages/Carrinho";
+import VisualizaUmPedido from "../pages/VisualizaUmPedido";
+import OurStatusBarLeft from "./OurStatusBarLeft";
+import OurStatusBarRight from "./OurStatusBarRight";
+import MontarSorvete from "../pages/MontarSorvete";
+import MontarSorveteAcompanhamento from "../pages/MontarSorveteAcompanhamento";
+import MontarSorveteFinalizado from "../pages/MontarSorveteFinalizado";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,29 +33,7 @@ const Navbar = (props) => {
       tabBarOptions={{
         keyboardHidesTabBar: true,
       }}
-      >
-
-      <Tab.Screen
-        name="Visualizar-Pedidos"
-        component={() => <VisualizaTodosPedidos navigation={props.navigation} />}
-        options={(props) => ({
-        headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
-        tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Perfil',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
-          tabBarButton: () => null,
-          tabBarVisible: false
-        })}
-      />
-        
+    >
       <Tab.Screen
         name="Home"
         component={Home}
@@ -64,79 +41,104 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarIcon: ({ size, focused, color }) => {
+            if (focused) {
+              return <Ionicons name="home" size={size} color={color} />;
+            } else {
+              return (
+                <Ionicons name="home-outline" size={size} color={color} />
+              );
+            }
+          },
+          tabBarLabel: "Home",
+          tabBarActiveTintColor: "#FF40A0",
+          tabBarInactiveTintColor: "#FF40A0",
+        })}
+      />
+      <Tab.Screen
+        name="Carrinho"
+        component={Carrinho}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarIcon: ({ size, focused, color }) => {
+            if (focused) {
+              return <Ionicons name="cart" size={size} color={color} />;
+            } else {
+              return (
+                <AntDesign name="shoppingcart" size={size} color={color} />
+              );
+            }
+          },
+          tabBarLabel: "Carrinho",
+          tabBarActiveTintColor: "#FF40A0",
+          tabBarInactiveTintColor: "#FF40A0",
+        })}
+      />
+      <Tab.Screen
+        name="Visualizar-Pedidos"
+        component={() => (
+          <VisualizaTodosPedidos navigation={props.navigation} />
+        )}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
           tabBarIcon: ({ size, focused, color }) => {
             if(focused){
               return (
-                  <Ionicons name="home" size={size} color="#FF40A0" />
-                );
-              }else{
-                return (
-                  <Ionicons name="home-outline" size={size} color="#FF40A0" />
-              )
+                <Image
+                  style={{ width: size, height: size }}
+                  source={require("../assets/footer/footer-perfil-icon.png")}
+                />
+              );
+            }else{
+              return <MaterialIcons name="list-alt" size={size} color={color} />
             }
           },
-          tabBarLabel: 'Home',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          tabBarLabel: "Pedidos",
+          tabBarActiveTintColor: "#FF40A0",
+          tabBarInactiveTintColor: "#FF40A0",
         })}
       />
 
-
       <Tab.Screen
-          name="Visualizar-Todos-Produtos"
-          component={() => <TodosOsProdutos /> }
-          options={(props) => ({
-            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
-            headerLeft: () => <OurStatusBarLeft />,
-            headerTitle: () => {},
-            headerStyle: { backgroundColor: '#E5F8FF' },
-            headerTintColor: '#fff',
-            tabBarIcon: ({ size, focused, color }) => {
-              return (
-                <Image
-                  style={{ width: size, height: size }}
-                  source={require('../assets/footer/footer-perfil-icon.png')}
-                />
-              );
-            },
-            tabBarLabel: 'Visualizar Todos Produtos',
-            tabBarLabel: 'Perfil',
-            tabBarActiveTintColor: '#FF40A0',
-            tabBarInactiveTintColor: '#000000',
-            tabBarButton: () => null,
-            tabBarVisible: false
-          })}
+        name="Visualizar-Todos-Produtos"
+        component={() => <TodosOsProdutos />}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Visualizar Todos Produtos",
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        })}
       />
 
       <Tab.Screen
-          name="Visualiza-Pedido"
-          component={() => <VisualizaUmPedido /> }
-          options={(props) => ({
-            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
-            headerLeft: () => <OurStatusBarLeft />,
-            headerTitle: () => {},
-            headerStyle: { backgroundColor: '#E5F8FF' },
-            headerTintColor: '#fff',
-            tabBarIcon: ({ size, focused, color }) => {
-              return (
-                <Image
-                  style={{ width: size, height: size }}
-                  source={require('../assets/footer/footer-perfil-icon.png')}
-                />
-              );
-            },
-            tabBarLabel: 'Visualizar Um Pedido',
-            tabBarLabel: 'Perfil',
-            tabBarActiveTintColor: '#FF40A0',
-            tabBarInactiveTintColor: '#000000',
-            tabBarButton: () => null,
-            tabBarVisible: false
-          })}
+        name="Visualiza-Pedido"
+        component={() => <VisualizaUmPedido />}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Visualizar Um Pedido",
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        })}
       />
 
-      
       <Tab.Screen
         name="Perfil-Usuario"
         component={PerfilUsuario}
@@ -144,19 +146,11 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Perfil',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Perfil",
+          tabBarButton: () => null,
+          tabBarVisible: false,
         })}
       />
 
@@ -167,21 +161,11 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Sorvete',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Sorvete",
           tabBarButton: () => null,
-          tabBarVisible: false
+          tabBarVisible: false,
         })}
       />
 
@@ -192,21 +176,11 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Montar-Sorvete',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Montar-Sorvete",
           tabBarButton: () => null,
-          tabBarVisible: false
+          tabBarVisible: false,
         })}
       />
       <Tab.Screen
@@ -216,21 +190,11 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Montar-Sorvete-Acompanhamento',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Montar-Sorvete-Acompanhamento",
           tabBarButton: () => null,
-          tabBarVisible: false
+          tabBarVisible: false,
         })}
       />
       <Tab.Screen
@@ -240,21 +204,11 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Montar-Sorvete-Finalizado',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Montar-Sorvete-Finalizado",
           tabBarButton: () => null,
-          tabBarVisible: false
+          tabBarVisible: false,
         })}
       />
 
@@ -265,45 +219,13 @@ const Navbar = (props) => {
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
           headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-home-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Editar',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Editar",
+          tabBarButton: () => null,
+          tabBarVisible: false,
         })}
       />
-
-     <Tab.Screen
-        name="Carrinho"
-        component={Carrinho}
-        options={(props) => ({
-          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
-          headerLeft: () => <OurStatusBarLeft />,
-          headerTitle: () => {},
-          headerStyle: { backgroundColor: '#E5F8FF' },
-          headerTintColor: '#fff',
-          tabBarIcon: ({ size, focused, color }) => {
-            return (
-              <Image
-                style={{ width: size, height: size }}
-                source={require('../assets/footer/footer-perfil-icon.png')}
-              />
-            );
-          },
-          tabBarLabel: 'Perfil',
-          tabBarActiveTintColor: '#FF40A0',
-          tabBarInactiveTintColor: '#000000',
-        })}
-      />
-
     </Tab.Navigator>
   );
 };

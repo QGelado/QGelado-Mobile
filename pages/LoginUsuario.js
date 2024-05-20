@@ -14,8 +14,7 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
   } from 'react-native';
-
-import { useFonts } from 'expo-font';
+import * as SecureStore from 'expo-secure-store';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 
@@ -29,31 +28,59 @@ const LoginUsuario = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-
-    const [fontsLoaded] = useFonts({
-      'titan-one': require('../assets/fonts/TitanOne-Regular.ttf'),
-      'poppins-bold': require('../assets/fonts/Poppins-Bold.ttf'),
-      'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
-    });
+    async function guardaToken(token, id_number){
+      await SecureStore.setItemAsync('token_usuario', token);
+      await SecureStore.setItemAsync('id_usuario', id_number);
+      console.log('guardei');
+    }
 
     const signIn = () => {
+      console.log('Fazendo login');
       fetch('https://6sncggx0-3000.brs.devtunnels.ms/usuario/login', {
         method: 'POST',
         body: JSON.stringify({
           email: email,
-          password: password
+          senha: password
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
         .then((response) => {
-          response.json()
+          const statusCode = response.status;
+
+          if(statusCode == 200 || statusCode == 201) {
+            return response.json();
+          }
+          
+          return Promise.reject(response);
         })
         .then((json) =>{ 
-          console.log(json)
-          setUser(json);
-          navigation.navigate("Home")
+          console.log("Usuário", json);
+          
+          if(json){
+            const token = json.token;
+            const idUsuario = json.usuarioExiste[0]._id;
+            setUser(json);
+            SecureStore.setItemAsync('token_usuario', token)
+            .then((res) =>{
+              console.log("Guardei o token", res);
+            })
+            .catch((erroToken) =>{
+              console.log("Erro token", erroToken);
+            })
+            SecureStore.setItemAsync('id_usuario', idUsuario)
+            .then((res) =>{
+              console.log("Guardei o id", res);
+              navigation.navigate("navbar")
+            })
+            .catch((erroId) =>{
+              console.log("Erro id", erroId);
+            })
+          }
+        })
+        .catch((e) => {
+          console.error(e);
         })
     }
   
