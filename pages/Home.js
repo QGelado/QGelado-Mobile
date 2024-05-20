@@ -26,7 +26,15 @@ export default function Home() {
     fetch(`https://6sncggx0-3000.brs.devtunnels.ms/sorvete-padrao`, {
       method: 'GET'
     })
-    .then((response) => response.json())
+    .then((response) => {
+      const statusCode = response.status;
+  
+      if(statusCode == 200) {
+        return response.json();
+      }
+
+      return Promise.reject(response);
+    })
     .then(( json ) => {
       setSorvetes(json)
     })
@@ -39,37 +47,41 @@ export default function Home() {
       const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
       const idRecuperado = await SecureStore.getItemAsync('id_usuario');
 
-      fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${idRecuperado}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${tokenRecuperado}`,
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-      .then((response) =>{ 
-        const statusCode = response.status;
-
-        if(statusCode == 200) {
-          return response.json();
-        }
-
-        setUser({nome: 'Usuário'});
-        return Promise.reject(response);
-      })
-      .then((json) => {
-
-        if(json.length == 0){
+      if(idRecuperado){
+        fetch(`https://6sncggx0-3000.brs.devtunnels.ms/usuario/${idRecuperado}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${tokenRecuperado}`,
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) =>{ 
+          const statusCode = response.status;
+  
+          if(statusCode == 200) {
+            return response.json();
+          }
+  
           setUser({nome: 'Usuário'});
-        }else{
-          setUser(json);
-        }
-        
-      })
-      .catch((error) => {
-        console.log("Erro!:");
-        console.log(error);
-        setPedidosData("Você ainda não tem pedidos!");
-      });    
+          return Promise.reject(response);
+        })
+        .then((json) => {
+  
+          if(Object.keys(json).length == 0){
+            setUser({nome: 'Usuário'});
+          }else{
+            setUser(json);
+          }
+          
+        })
+        .catch((error) => {
+          console.log("Erro!:");
+          console.log(error);
+        });    
+
+      }else{
+        setUser({nome: 'Usuário'});
+      }
   }
 
   
