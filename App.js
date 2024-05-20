@@ -24,10 +24,13 @@ import Navbar from './components/Navbar';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   return (
     <NavigationContainer>
+<<<<<<< HEAD
       <Stack.Navigator initialRouteName="Login">
+=======
+      <Stack.Navigator initialRouteName="navbar">
+>>>>>>> e4103c165acb49965d334fc384c65bfbbd319fc5
         <Stack.Screen
           name="navbar"
           component={Navbar}

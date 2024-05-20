@@ -18,6 +18,7 @@ import TodosOsProdutos from '../pages/TodosOsProdutos';
 import Home from '../pages/Home';
 import Sorvete from '../pages/Sorvete';
 import Carrinho from '../pages/Carrinho';
+import VisualizaUmPedido from '../pages/VisualizaUmPedido';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
 import MontarSorvete from '../pages/MontarSorvete';
@@ -26,11 +27,6 @@ import MontarSorveteFinalizado from '../pages/MontarSorveteFinalizado';
 
 
 const Tab = createBottomTabNavigator();
-
-/*
-tabBarButton: () => null,
-tabBarVisible: false
-*/ 
 
 const Navbar = (props) => {
   return (
@@ -42,7 +38,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Visualizar-Pedidos"
-        component={VisualizaTodosPedidos}
+        component={() => <VisualizaTodosPedidos navigation={props.navigation} />}
         options={(props) => ({
         headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
         tabBarIcon: ({ size, focused, color }) => {
@@ -106,6 +102,7 @@ const Navbar = (props) => {
               );
             },
             tabBarLabel: 'Visualizar Todos Produtos',
+            tabBarLabel: 'Perfil',
             tabBarActiveTintColor: '#FF40A0',
             tabBarInactiveTintColor: '#000000',
             tabBarButton: () => null,
@@ -113,6 +110,33 @@ const Navbar = (props) => {
           })}
       />
 
+      <Tab.Screen
+          name="Visualiza-Pedido"
+          component={() => <VisualizaUmPedido /> }
+          options={(props) => ({
+            headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+            headerLeft: () => <OurStatusBarLeft />,
+            headerTitle: () => {},
+            headerStyle: { backgroundColor: '#E5F8FF' },
+            headerTintColor: '#fff',
+            tabBarIcon: ({ size, focused, color }) => {
+              return (
+                <Image
+                  style={{ width: size, height: size }}
+                  source={require('../assets/footer/footer-perfil-icon.png')}
+                />
+              );
+            },
+            tabBarLabel: 'Visualizar Um Pedido',
+            tabBarLabel: 'Perfil',
+            tabBarActiveTintColor: '#FF40A0',
+            tabBarInactiveTintColor: '#000000',
+            tabBarButton: () => null,
+            tabBarVisible: false
+          })}
+      />
+
+      
       <Tab.Screen
         name="Perfil-Usuario"
         component={PerfilUsuario}
