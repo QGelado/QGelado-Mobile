@@ -14,8 +14,10 @@ import { Ionicons } from '@expo/vector-icons'
 import EditarPerfilUsuario from '../pages/EditarPerfilUsuario';
 import PerfilUsuario from '../pages/PerfilUsuario';
 import Home from '../pages/Home';
+import Carrinho from '../pages/Carrinho';
 import OurStatusBarLeft from './OurStatusBarLeft';
 import OurStatusBarRight from './OurStatusBarRight';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -96,6 +98,30 @@ const Navbar = (props) => {
           tabBarInactiveTintColor: '#000000',
         })}
       />
+
+     <Tab.Screen
+        name="Carrinho"
+        component={Carrinho}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: '#E5F8FF' },
+          headerTintColor: '#fff',
+          tabBarIcon: ({ size, focused, color }) => {
+            return (
+              <Image
+                style={{ width: size, height: size }}
+                source={require('../assets/footer/footer-perfil-icon.png')}
+              />
+            );
+          },
+          tabBarLabel: 'Perfil',
+          tabBarActiveTintColor: '#FF40A0',
+          tabBarInactiveTintColor: '#000000',
+        })}
+      />
+
     </Tab.Navigator>
   );
 };
