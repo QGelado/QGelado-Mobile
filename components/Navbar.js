@@ -13,6 +13,7 @@ import { Ionicons, AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import EditarPerfilUsuario from "../pages/EditarPerfilUsuario";
 import PerfilUsuario from "../pages/PerfilUsuario";
+import ExcluirUsuario from "../pages/ExcluirUsuario";
 import VisualizaTodosPedidos from "../pages/VisualizaTodosPedidos";
 import TodosOsProdutos from "../pages/TodosOsProdutos";
 import Home from "../pages/Home";
@@ -141,7 +142,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Perfil-Usuario"
-        component={PerfilUsuario}
+        component={() => <PerfilUsuario />}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
@@ -214,7 +215,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Editar-Perfil"
-        component={EditarPerfilUsuario}
+        component={() => <EditarPerfilUsuario />}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
@@ -226,6 +227,22 @@ const Navbar = (props) => {
           tabBarVisible: false,
         })}
       />
+
+      <Tab.Screen
+        name="Excluir-Usuario"
+        component={() => <ExcluirUsuario />}
+        options={(props) => ({
+          headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
+          headerLeft: () => <OurStatusBarLeft />,
+          headerTitle: () => {},
+          headerStyle: { backgroundColor: "#E5F8FF" },
+          headerTintColor: "#fff",
+          tabBarLabel: "Excluir",
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        })}
+      />
+      
     </Tab.Navigator>
   );
 };
