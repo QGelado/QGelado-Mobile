@@ -45,7 +45,7 @@ const EditarPerfilUsuario = ({ navigation }) => {
     const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
     const idRecuperado = await SecureStore.getItemAsync('id_usuario');
 
-    fetch(`${route}usuario/${idRecuperado}`, {
+    fetch(`${route}/usuario/${idRecuperado}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${tokenRecuperado}`,
@@ -87,7 +87,7 @@ const EditarPerfilUsuario = ({ navigation }) => {
     const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
     const idRecuperado = await SecureStore.getItemAsync('id_usuario');
     
-    fetch(`${route}usuario/${idRecuperado}`, {
+    fetch(`${route}/usuario/${idRecuperado}`, {
       method: 'PUT',
       body: JSON.stringify({
         nome: nomeUser,
