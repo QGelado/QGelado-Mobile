@@ -12,7 +12,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
+  Alert,
 } from 'react-native';
 import { useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
@@ -20,20 +20,32 @@ import * as SecureStore from 'expo-secure-store';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 import route from '../BackendEndpoint';
+import * as Notifications from 'expo-notifications';
 
-async function alertMessage(titulo = "Erro", texto= "Alguma coisa deu errado!")  {
+async function alertMessage(
+  titulo = 'Erro',
+  texto = 'Alguma coisa deu errado!'
+) {
   Alert.alert(titulo, texto, [
     {
-      text: 'OK', onPress: () => console.log('OK')},
-    ]
-  );
+      text: 'OK',
+      onPress: () => console.log('OK'),
+    },
+  ]);
 }
 
-async function guardaToken(token, id_number){
+async function guardaToken(token, id_number) {
   await SecureStore.setItemAsync('token_usuario', token);
   await SecureStore.setItemAsync('id_usuario', id_number);
 }
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 const CadastroUsuario = ({ navigation }) => {
   const [nome, setNome] = useState('');
@@ -42,13 +54,16 @@ const CadastroUsuario = ({ navigation }) => {
   const [telefone, setTelefone] = useState('');
   const [endereco, setEndereco] = useState('');
 
-  function cadastraUsuarioAPI() {
+  async function cadastraUsuarioAPI() {
+    const token = await Notifications.getExpoPushTokenAsync();
+
     const obj = {
       nome: nome,
       email: email,
       endereco: endereco,
       senha: senha,
       telefone: parseInt(telefone),
+      tokenNotifications: token.data.toString()
     };
 
     fetch(`${route}/usuario`, {
@@ -58,15 +73,14 @@ const CadastroUsuario = ({ navigation }) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     })
-      .then((response) =>{ 
+      .then((response) => {
         const statusCode = response.status;
 
-        if(statusCode == 200 || statusCode == 201) {
+        if (statusCode == 200 || statusCode == 201) {
           return response.json();
         }
-        
-        return Promise.reject(response);
 
+        return Promise.reject(response);
       })
       .then((json) => {
         const token = json.token;
@@ -74,16 +88,19 @@ const CadastroUsuario = ({ navigation }) => {
 
         guardaToken(token, idUsuario);
 
-        alertMessage(`Seja bem vindo, ${json.data.nome}!`, "Agora você pode aproveitar e escolher o seu sorvete preferido!");
-        
+        alertMessage(
+          `Seja bem vindo, ${json.data.nome}!`,
+          'Agora você pode aproveitar e escolher o seu sorvete preferido!'
+        );
+
         navigation.navigate('navbar');
       })
       .catch((error) => {
-        console.log("Um erro aconteceu!");
+        console.log('Um erro aconteceu!');
 
         error.json().then((json) => {
-          alertMessage("Erro ao cadastrar usuário!", json.message);
-        })
+          alertMessage('Erro ao cadastrar usuário!', json.message);
+        });
       });
   }
 
