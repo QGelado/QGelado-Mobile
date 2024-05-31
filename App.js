@@ -1,5 +1,5 @@
-import 'react-native-reanimated'
-import 'react-native-gesture-handler'
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import {
   Text,
   SafeAreaView,
@@ -8,6 +8,7 @@ import {
   View,
   Pressable,
   Dimensions,
+  Alert,
 } from 'react-native';
 import React, { useEffect } from 'react';
 
@@ -19,8 +20,17 @@ import CadastroUsuario from './pages/CadastroUsuario';
 import LoginUsuario from './pages/LoginUsuario';
 import ExcluirUsuario from './pages/ExcluirUsuario';
 import Navbar from './components/Navbar';
+import * as Notifications from 'expo-notifications';
 
 const Stack = createNativeStackNavigator();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,6 +38,7 @@ export default function App() {
     'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
     'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
   });
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
@@ -49,16 +60,12 @@ export default function App() {
           options={{ headerShown: false }}
         />
 
-       <Stack.Screen
+        <Stack.Screen
           name="Excluir"
           component={ExcluirUsuario}
           options={{ headerShown: false }}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
-
-    
-
   );
 }

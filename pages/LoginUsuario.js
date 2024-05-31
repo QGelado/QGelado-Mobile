@@ -18,8 +18,18 @@ import * as SecureStore from 'expo-secure-store';
 import { SvgXml } from 'react-native-svg';
 import WaveSvg from '../assets/svgs/wave';
 import route from '../BackendEndpoint'
+import * as Notifications from 'expo-notifications';
 
 import { useUserStore } from '../store/userStore';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
 
 const LoginUsuario = ({ navigation }) => {
     const [user, setUser] = useUserStore((state) => [
@@ -35,13 +45,16 @@ const LoginUsuario = ({ navigation }) => {
       console.log('guardei');
     }
 
-    const signIn = () => {
+    const signIn = async () => {
       console.log('Fazendo login');
+      const token = await Notifications.getExpoPushTokenAsync();
+
       fetch(`${route}/usuario/login`, {
         method: 'POST',
         body: JSON.stringify({
           email: email,
-          senha: password
+          senha: password,
+          tokenNotification: token.data.toString()
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -61,7 +74,9 @@ const LoginUsuario = ({ navigation }) => {
           
           if(json){
             const token = json.token;
-            const idUsuario = json.usuarioExiste[0]._id;
+            console.log(json)
+            console.log(json.resultadoAtualizacao)
+            const idUsuario = json.resultadoAtualizacao._id;
             setUser(json);
             SecureStore.setItemAsync('token_usuario', token)
             .then((res) =>{

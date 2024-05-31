@@ -142,7 +142,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Perfil-Usuario"
-        component={() => <PerfilUsuario />}
+        component={() => <PerfilUsuario navigation={props.navigation}/>}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,
@@ -215,7 +215,7 @@ const Navbar = (props) => {
 
       <Tab.Screen
         name="Editar-Perfil"
-        component={() => <EditarPerfilUsuario />}
+        component={() => <EditarPerfilUsuario navigation={props.navigation} />}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,

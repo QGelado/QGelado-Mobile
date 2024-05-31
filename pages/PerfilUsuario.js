@@ -32,7 +32,7 @@ const PerfilUsuario = ({ navigation }) => {
     console.log("idrec",idRecuperado, tokenRecuperado);
 
 
-    fetch(`${route}usuario/${idRecuperado}`, {
+    fetch(`${route}/usuario/${idRecuperado}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${tokenRecuperado}`,
