@@ -55,7 +55,12 @@ const CadastroUsuario = ({ navigation }) => {
   const [endereco, setEndereco] = useState('');
 
   async function cadastraUsuarioAPI() {
-    const token = await Notifications.getExpoPushTokenAsync();
+    let token = '';
+    try {
+      token = await Notifications.getExpoPushTokenAsync();
+    } catch {
+      token = { data: '' };
+    }
 
     const obj = {
       nome: nome,
@@ -63,7 +68,7 @@ const CadastroUsuario = ({ navigation }) => {
       endereco: endereco,
       senha: senha,
       telefone: parseInt(telefone),
-      tokenNotifications: token.data.toString()
+      tokenNotifications: token.data.toString(),
     };
 
     fetch(`${route}/usuario`, {
