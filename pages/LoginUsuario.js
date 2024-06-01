@@ -47,7 +47,9 @@ const LoginUsuario = ({ navigation }) => {
 
     const signIn = async () => {
       console.log('Fazendo login');
-      const token = await Notifications.getExpoPushTokenAsync();
+      const token = await Notifications.getExpoPushTokenAsync({
+        projectId: '0dd7b46f-37b6-4ca6-afcd-c186fe04dfe9'
+      });
 
       fetch(`${route}/usuario/login`, {
         method: 'POST',
