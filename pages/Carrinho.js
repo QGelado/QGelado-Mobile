@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
+<<<<<<< HEAD
   ScrollView,
   Alert
 } from 'react-native';
@@ -109,6 +110,21 @@ const Carrinho = ({navigation}) => {
       <Text style={styles.textTitleMain}>Carrinho</Text>
       <View style={styles.container}>
         {cart.map((sorvete) => {
+=======
+} from 'react-native';
+import { useCartStore } from '../store/cartStore';
+import route from '../BackendEndpoint';
+import { Ionicons } from '@expo/vector-icons';
+
+const Carrinho = () => {
+  const [sorvetes, setSorvetes] = useCartStore((state) => [state.cart]);
+
+  return (
+    <SafeAreaView style={styles.wrapper}>
+      <Text style={styles.textTitleMain}>Carrinho</Text>
+      <View style={styles.container}>
+        {sorvetes.map((sorvete) => {
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
           return (
             <View
               style={{
@@ -124,7 +140,11 @@ const Carrinho = ({navigation}) => {
                     {sorvete?.nome}
                   </Text>
                   <Text style={{ fontSize: 11, fontFamily: 'poppins-regular' }}>
+<<<<<<< HEAD
                     {sorvete?.sabor ? sorvete?.sabor : sorvete.descricao}
+=======
+                    {sorvete?.sabor}
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
                   </Text>
                 </View>
 
@@ -148,18 +168,37 @@ const Carrinho = ({navigation}) => {
                         backgroundColor: '#FF90C8',
                         borderRadius: 10,
                       }}>
+<<<<<<< HEAD
                       <TouchableOpacity style={styles.button} onPress={() => removeFromCart(sorvete)}>
                         <Text style={styles.iconPlus}>-</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={[styles.button, { borderColor: 'green' }]}
                         onPress={() => addToCart(sorvete)}>
+=======
+                      <TouchableOpacity style={styles.button}>
+                        <Text style={styles.iconPlus}>-</Text>
+                      </TouchableOpacity>
+                      <Text
+                        style={[
+                          styles.iconPlus,
+                          { paddingHorizontal: 12, fontSize: 16 },
+                        ]}>
+                        3
+                      </Text>
+                      <TouchableOpacity
+                        style={[styles.button, { borderColor: 'green' }]}>
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
                         <Text style={styles.iconPlus}>+</Text>
                       </TouchableOpacity>
                     </View>
 
                     <TouchableOpacity
+<<<<<<< HEAD
                       style={{ marginLeft: 10, backgroundColor: '#FFC2E1', borderRadius: 20, padding: 5}} onPress={() => addCart(sorvete)}>
+=======
+                      style={{ marginLeft: 10, backgroundColor: '#FFC2E1', borderRadius: 20, padding: 5}}>
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
                       <Ionicons name="trash" size={20} color="#FF40A0" />
                     </TouchableOpacity>
                   </View>
@@ -193,7 +232,11 @@ const Carrinho = ({navigation}) => {
             fontFamily: 'titan-one',
             color: '#197CFF',
           }}>
+<<<<<<< HEAD
           {totalPrice}
+=======
+          40, 99
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
         </Text>
       </View>
 
@@ -205,9 +248,13 @@ const Carrinho = ({navigation}) => {
           flexDirection: 'row',
         }}>
         <TouchableOpacity
+<<<<<<< HEAD
           style={{ padding: 20, borderRadius: 20, backgroundColor: '#6AAAFF' }}
           onPress={() => navigation.navigate('Home')}
           >
+=======
+          style={{ padding: 20, borderRadius: 20, backgroundColor: '#6AAAFF' }}>
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
           <Text
             style={{ color: 'white', fontSize: 13, fontFamily: 'titan-one' }}>
             Continuar comprando
@@ -215,7 +262,11 @@ const Carrinho = ({navigation}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
+<<<<<<< HEAD
           style={{ padding: 20, borderRadius: 20, backgroundColor: '#FF40A0' }} onPress={finalizarPedido}>
+=======
+          style={{ padding: 20, borderRadius: 20, backgroundColor: '#FF40A0' }}>
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
           <Text
             style={{ color: 'white', fontSize: 13, fontFamily: 'titan-one' }}>
             Finalizar pedido
