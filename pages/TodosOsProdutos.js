@@ -6,6 +6,7 @@ import { Link } from '@react-navigation/native';
 import CardHome from '../components/CardHome';
 import CardLoading from '../components/CardLoading';
 import * as SecureStore from 'expo-secure-store';
+import route from '../BackendEndpoint'
 
 export default function Home() {
   const [filter, setFilter] = useState({
@@ -22,7 +23,7 @@ export default function Home() {
   }
 
   const getSorvetes = () => {
-    fetch(`https://r7b6tzdg-3000.brs.devtunnels.ms/sorvete-padrao`, {
+    fetch(`${route}/sorvete-padrao`, {
       method: 'GET'
     })
     .then((response) => response.json())
