@@ -35,6 +35,22 @@ const LoginUsuario = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+<<<<<<< HEAD
+  useEffect(() => {
+    if(checarToken() === true){
+      navigation.navigate('navbar');
+    }
+  }, [])
+
+  async function checarToken(){
+    const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
+    const idRecuperado = await SecureStore.getItemAsync('id_usuario');
+    console.log("token rec", tokenRecuperado, "id rec", idRecuperado)
+    return tokenRecuperado !== null && idRecuperado !== null
+  }
+
+=======
+>>>>>>> ca10e904515f2603b2c6b59ba5e6d1177c457ba5
   async function guardaToken(token, id_number) {
     await SecureStore.setItemAsync('token_usuario', token);
     await SecureStore.setItemAsync('id_usuario', id_number);

@@ -60,7 +60,7 @@ const Navbar = (props) => {
       />
       <Tab.Screen
         name="Carrinho"
-        component={Carrinho}
+        component={() => (<Carrinho navigation={props.navigation} />)}
         options={(props) => ({
           headerRight: () => <OurStatusBarRight navegacao={props.navigation} />,
           headerLeft: () => <OurStatusBarLeft />,

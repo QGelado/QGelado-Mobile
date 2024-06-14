@@ -16,25 +16,51 @@ const MontarSorveteFinalizado = ({route}) => {
         state.addToCart
     ])
     const navigation = useNavigation()
-    const [sorvetes, setSorvetes] = useState([sorvete])
+    const [sorvetes, setSorvetes] = useState(sorvete)
     const [quantidade, setQuantidade] = useState(1)
 
     const maisSorvete = () => {
-        setSorvetes([...sorvetes, sorvete])
         setQuantidade(quantidade + 1)
     }
     const menosSorvete = () => {
-        if(sorvetes.length > 1){
-            setSorvetes(currSorvetes => currSorvetes.slice(0, currSorvetes.length -1))
+        if(quantidade > 1){
             setQuantidade(quantidade - 1)
         }
     }
     const totalPrice = (sorvete.recipiente?.preco + sorvete?.sabores.reduce((acc, val) => acc + val.preco, 0) + sorvete?.acompanhamentos.reduce((acc, val) => acc + val.preco, 0)) * quantidade
 
     const addCard = () =>{
+        let nome = 'Sorvete de '
+        sorvetes.sabores.forEach((sabor, index) => {
+          if(index === sorvetes.sabores.length - 1){
+            nome += sabor.sabor
+          }else if(index === sorvetes.sabores.length - 2){
+            nome += sabor.sabor + ' e '
+          }else{
+            nome += sabor.sabor + ', '
+          }
+        })
+        let descricao = nome + `. Na(o) ${sorvete.recipiente.tipo} com `
+        sorvetes.acompanhamentos.forEach((sabor, index) => {
+          if(index === sorvetes.acompanhamentos.length - 1){
+            descricao += sabor.nome + '.'
+          }else if(index === sorvetes.acompanhamentos.length - 2){
+            descricao += sabor.nome + ' e '
+          }else{
+            descricao += sabor.nome + ', '
+          }
+        })
+
+        const sorvetePedido = {
+          ...sorvetes,
+          descricao: descricao,
+          nome: nome,
+          preco: totalPrice
+        }
+        console.log(sorvetePedido)
         Alert.alert(`Seu sorvete foi adicionado ao carrinho!`)
         Array.from({length: quantidade}).forEach(()=>{
-          addToCart(sorvete)
+          addToCart(sorvetePedido)
         })
         console.log(cart);
         setTimeout(() => {

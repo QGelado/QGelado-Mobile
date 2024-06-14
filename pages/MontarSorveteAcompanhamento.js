@@ -82,6 +82,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
     getAcompanhamentos();
   }, []);
   return (
+    <ScrollView style={{paddingBottom: 10}}>
     <View style={Styles.App}>
       <MaskedView
         maskElement={<Text style={Styles.title}>Montar Sorvete</Text>}
@@ -237,6 +238,7 @@ const MontarSorveteAcompanhamento = ({ route }) => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

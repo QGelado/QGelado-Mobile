@@ -29,6 +29,8 @@ const PerfilUsuario = ({ navigation }) => {
   async function recuperaDadosUsuario() {
     const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
     const idRecuperado = await SecureStore.getItemAsync('id_usuario');
+    console.log("idrec",idRecuperado, tokenRecuperado);
+
 
     fetch(`${route}/usuario/${idRecuperado}`, {
       method: 'GET',
@@ -51,6 +53,9 @@ const PerfilUsuario = ({ navigation }) => {
         setEmail(json.email)  
         setTelefone(json.telefone.toString()) 
         setEndereco(json.endereco) 
+        console.log("Perfil",json);
+        console.log("Perfil id",idRecuperado);
+
       })
       .catch((error) => {
         console.log('Erro!:');
@@ -60,6 +65,7 @@ const PerfilUsuario = ({ navigation }) => {
 
   useEffect(() => {
     recuperaDadosUsuario();
+
   }, []);
 
   return (
