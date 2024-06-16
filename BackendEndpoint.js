@@ -1,3 +1,3 @@
-const route = "https://qgelado-backend.onrender.com/";
+const route = "https://qgelado-backend.onrender.com";
 
 export default route;

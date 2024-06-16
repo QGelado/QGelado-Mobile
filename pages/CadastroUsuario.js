@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
   },
   mainContainerInputs: {
     width: Dimensions.get('screen').width,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   inputContainerTitle: {

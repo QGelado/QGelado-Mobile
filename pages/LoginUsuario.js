@@ -13,6 +13,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert
 } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { SvgXml } from 'react-native-svg';
@@ -111,6 +112,12 @@ const LoginUsuario = ({ navigation }) => {
       })
       .catch((e) => {
         console.error(e);
+        Alert.alert("Não foi possivel fazer login", "", [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK'),
+          },
+        ]);
       });
   };
 
