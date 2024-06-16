@@ -186,11 +186,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#E5F8FF',
+    minHeight: Dimensions.get('screen').height,
+    justifyContent: 'space-between'
   },
   mainContainerInputs: {
     width: Dimensions.get('screen').width,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 30,
   },
   inputContainerTitle: {
     marginTop: 15,
@@ -242,10 +245,14 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    position: 'relative',
+    alignSelf: 'flex-end',
+    justifySelf: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
   },
   logoWaveSvgImage: {
     position: 'absolute',
+    bottom: 30,
     alignSelf: 'center',
   },
 });

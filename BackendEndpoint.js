@@ -1,3 +1,3 @@
-const route = "https://6sncggx0-3000.brs.devtunnels.ms";
+const route = "https://qgelado-backend.onrender.com/";
 
 export default route;

@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 export default StyleSheet.create({
   App:{
     backgroundColor: '#E5F8FF',
     flexGrow: 1,
     alignItems: 'center',
-    paddingBottom: 10
+    paddingBottom: 10,
+    minHeight: Dimensions.get('window').height
   },
   imgSorvete:{
     backgroundColor: '#E5F8FF',
