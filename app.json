@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "qgelado-mobile",
+    "slug": "snack-af9f18e7-bf28-44ef-bf45-cfbd77e1b3f6",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./logo/logo-qgelado.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./logo/logo-qgelado.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./logo/logo-qgelado.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./logo/logo-qgelado.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store"
+    ]
+  }
+}
