@@ -39,7 +39,7 @@ export default function Home() {
       const tokenRecuperado = await SecureStore.getItemAsync('token_usuario');
       const idRecuperado = await SecureStore.getItemAsync('id_usuario');
 
-      fetch(`https://r7b6tzdg-3000.brs.devtunnels.ms/usuario/${idRecuperado}`, {
+      fetch(`${route}/usuario/${idRecuperado}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${tokenRecuperado}`,
