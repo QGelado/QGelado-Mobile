@@ -1,11 +1,17 @@
-# Sample Snack app
+# QGelado - Mobile 📱
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+## Sobre o projeto ✒️
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+O aplicativo foi desenvolvido junto com o framework React Native e permite aos usuários comprar sorvetes que já estão em estoque ou criar seu próprio sorvete personalizado com os sabores e acompanhamentos que preferir. Além disso, os usuários receberão uma notificação quando o pedido for concluído. A parte de pagamento será realizada na loja física e não está prevista para o escopo do projeto. 
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+<p align="center">
+   <img src="https://github.com/QGelado/QGelado-Mobile/assets/84794798/60776571-456e-403e-bab9-bbfb33a91edd" width="20%" >
+</p>
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+## Instalação 🗒️
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+Há várias maneiras de executar uma aplicação mobile, mas a forma mais simples e rápida é através do site Snack. Basta criar uma conta e clonar o projeto.
+
+https://snack.expo.dev/ 
+
+<h6 align='right'>Feito com ❤️ por <a href="https://github.com/QGelado" target="_blank">QGelado</a></h6> 
